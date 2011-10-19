@@ -24,13 +24,13 @@ namespace Releaser.Core.MongoDb
 		/// </summary>
 		public void SaveEntity<T>(T entity)
 		{
-			GetCollection<T>().Insert(entity, SafeMode.True);
+			GetCollection<T>().Save(entity, SafeMode.True);
 		}
 
 		/// <summary>
-		/// Saves entities to database.
+		/// Inserts new entities to database.
 		/// </summary>
-		public void SaveEntities<T>(IEnumerable<T> entities)
+		public void InsertEntities<T>(IEnumerable<T> entities)
 		{
 			GetCollection<T>().InsertBatch(entities, SafeMode.True);
 		}

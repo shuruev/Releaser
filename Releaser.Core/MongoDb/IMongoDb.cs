@@ -14,9 +14,9 @@ namespace Releaser.Core.MongoDb
 		void SaveEntity<T>(T entity);
 
 		/// <summary>
-		/// Saves entities to database.
+		/// Inserts new entities to database.
 		/// </summary>
-		void SaveEntities<T>(IEnumerable<T> entities);
+		void InsertEntities<T>(IEnumerable<T> entities);
 
 		/// <summary>
 		/// Gets entity from database.
