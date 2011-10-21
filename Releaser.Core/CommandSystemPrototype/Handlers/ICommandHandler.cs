@@ -6,7 +6,7 @@ namespace Releaser.Core
 	public interface ICommandHandler
 	{
 		/// <summary>
-		/// Executes command.
+		/// Executes specified command.
 		/// </summary>
 		void Execute(BaseCommand command);
 	}

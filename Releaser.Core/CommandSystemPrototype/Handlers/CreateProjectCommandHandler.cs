@@ -5,18 +5,13 @@ namespace Releaser.Core
 	/// <summary>
 	/// Handler for create project command.
 	/// </summary>
-	public class CreateProjectCommandHandler : ICommandHandler
+	public class CreateProjectCommandHandler : BaseCommandHandler<CreateProjectCommand>
 	{
 		/// <summary>
-		/// Executes command.
+		/// Executes specified command.
 		/// </summary>
-		public void Execute(BaseCommand baseCommand)
+		protected override void ExecuteInternal(CreateProjectCommand command)
 		{
-			// TODO: Try to rework this idea.
-			if (!(baseCommand is CreateProjectCommand))
-				throw new Exception();
-
-			var command = baseCommand as CreateProjectCommand;
 		}
 	}
 }

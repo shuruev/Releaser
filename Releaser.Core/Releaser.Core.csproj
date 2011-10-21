@@ -74,11 +74,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandSystemPrototype\BaseCommand.cs" />
-    <Compile Include="CommandSystemPrototype\ICommandHandler.cs" />
+    <Compile Include="CommandSystemPrototype\CommandNotSupportedException.cs" />
+    <Compile Include="CommandSystemPrototype\Commands\BaseCommand.cs" />
+    <Compile Include="CommandSystemPrototype\Handlers\BaseCommandHandler.cs" />
+    <Compile Include="CommandSystemPrototype\Handlers\ICommandHandler.cs" />
     <Compile Include="CommandSystemPrototype\CommandHandlersFactory.cs" />
-    <Compile Include="CommandSystemPrototype\CreateProjectCommand.cs" />
-    <Compile Include="CommandSystemPrototype\CreateProjectCommandHandler.cs" />
+    <Compile Include="CommandSystemPrototype\Commands\CreateProjectCommand.cs" />
+    <Compile Include="CommandSystemPrototype\Handlers\CreateProjectCommandHandler.cs" />
     <Compile Include="MongoDb\IMongoDb.cs" />
     <Compile Include="MongoDb\MongoDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
