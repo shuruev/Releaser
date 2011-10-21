@@ -1,4 +1,7 @@
-namespace Releaser.Core
+using Releaser.Core.Commands;
+using Releaser.Core.Results;
+
+namespace Releaser.Core.Handlers
 {
 	/// <summary>
 	/// Interface for command handlers.
@@ -8,6 +11,6 @@ namespace Releaser.Core
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		void Execute(BaseCommand command);
+		BaseResult Execute(BaseCommand command);
 	}
 }

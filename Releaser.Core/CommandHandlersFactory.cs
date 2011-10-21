@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Releaser.Core.Commands;
+using Releaser.Core.Handlers;
 
 namespace Releaser.Core
 {
@@ -12,7 +14,7 @@ namespace Releaser.Core
 		/// <summary>
 		/// Registers handler for command.
 		/// </summary>
-		public void RegisterTaskHandler<TCommand, THandler>()
+		public void Register<TCommand, THandler>()
 			where TCommand : BaseCommand, new()
 			where THandler : ICommandHandler, new()
 		{
@@ -23,7 +25,8 @@ namespace Releaser.Core
 		}
 
 		/// <summary>
-		/// Returns handler for command. Returns null if command is not registered.
+		/// Returns handler for specified command.
+		/// Returns null if command is not registered.
 		/// </summary>
 		public ICommandHandler Resolve(string commandName)
 		{

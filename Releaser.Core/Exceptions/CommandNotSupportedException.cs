@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Releaser.Core
+namespace Releaser.Core.Exceptions
 {
 	/// <summary>
 	/// Exception occured when handler can't execute command.

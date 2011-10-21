@@ -1,4 +1,4 @@
-﻿namespace Releaser.Core
+﻿namespace Releaser.Core.Commands
 {
 	/// <summary>
 	/// Base class for commands.
