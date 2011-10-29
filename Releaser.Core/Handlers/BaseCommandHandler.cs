@@ -1,5 +1,6 @@
 using Releaser.Core.Commands;
 using Releaser.Core.Exceptions;
+using Releaser.Core.MongoDb;
 using Releaser.Core.Results;
 
 namespace Releaser.Core.Handlers
@@ -12,6 +13,16 @@ namespace Releaser.Core.Handlers
 		where T : class
 		where TResult : BaseResult
 	{
+		protected readonly IMongoDb m_mongoDb;
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		protected BaseCommandHandler(IMongoDb mongoDb)
+		{
+			m_mongoDb = mongoDb;
+		}
+
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>

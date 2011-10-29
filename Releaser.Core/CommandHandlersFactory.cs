@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Releaser.Core.Commands;
 using Releaser.Core.Handlers;
+using Releaser.Core.Ioc;
 
 namespace Releaser.Core
 {
@@ -9,17 +10,26 @@ namespace Releaser.Core
 	/// </summary>
 	public class CommandHandlersFactory
 	{
+		private readonly IResolver m_resolver;
 		private readonly Dictionary<string, ICommandHandler> m_commandHandlers = new Dictionary<string, ICommandHandler>();
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		public CommandHandlersFactory(IResolver resolver)
+		{
+			m_resolver = resolver;
+		}
 
 		/// <summary>
 		/// Registers handler for command.
 		/// </summary>
 		public void Register<TCommand, THandler>()
 			where TCommand : BaseCommand, new()
-			where THandler : ICommandHandler, new()
+			where THandler : ICommandHandler
 		{
 			var command = new TCommand();
-			var handler = new THandler();
+			var handler = m_resolver.Resolve<THandler>();
 
 			m_commandHandlers[command.Name] = handler;
 		}

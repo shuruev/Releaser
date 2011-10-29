@@ -59,6 +59,9 @@
     <DocumentationFile>bin\Release\Releaser.Core.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\References\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\References\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -74,9 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandEngine.cs" />
     <Compile Include="Exceptions\CommandNotSupportedException.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Handlers\BaseCommandHandler.cs" />
+    <Compile Include="Ioc\AutofacResolver.cs" />
+    <Compile Include="Ioc\IResolver.cs" />
     <Compile Include="Results\BaseResult.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
     <Compile Include="CommandHandlersFactory.cs" />
