@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using System;
 
 namespace Releaser.Core.Entities
 {
@@ -11,8 +10,7 @@ namespace Releaser.Core.Entities
 		/// <summary>
 		/// Gets or sets entity identifier.
 		/// </summary>
-		[BsonId]
-		public ObjectId Id { get; set; }
+		public Guid Id { get; set; }
 
 		/// <summary>
 		/// Gets or sets project name.

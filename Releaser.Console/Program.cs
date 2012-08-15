@@ -1,12 +1,9 @@
-﻿using System.Configuration;
-using Autofac;
-using Autofac.Core;
+﻿using Autofac;
 using Releaser.Core;
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
 using Releaser.Core.Handlers;
 using Releaser.Core.Ioc;
-using Releaser.Core.MongoDb;
 
 namespace Releaser.Console
 {
@@ -14,8 +11,7 @@ namespace Releaser.Console
 	{
 		private static void Main()
 		{
-			MongoDb mongoDb = GetMongoDb();
-			AutofacResolver resolver = GetResolver(mongoDb);
+			AutofacResolver resolver = GetResolver();
 
 			CommandEngine engine = new CommandEngine(resolver);
 
@@ -28,21 +24,13 @@ namespace Releaser.Console
 			engine.ExecuteCommand(command);
 		}
 
-		private static AutofacResolver GetResolver(MongoDb mongoDb)
+		private static AutofacResolver GetResolver()
 		{
 			ContainerBuilder builder = new ContainerBuilder();
-			builder.RegisterType<CreateProjectCommandHandler>()
-				.WithParameter("mongoDb", mongoDb);
+			builder.RegisterType<CreateProjectCommandHandler>();
+				
 
 			return new AutofacResolver(builder.Build());
-		}
-
-		private static MongoDb GetMongoDb()
-		{
-			var mongoDbUrl = ConfigurationManager.AppSettings["MongoDb"];
-			var databaseName = ConfigurationManager.AppSettings["DatabaseName"];
-
-			return new MongoDb(mongoDbUrl, databaseName);
 		}
 	}
 }

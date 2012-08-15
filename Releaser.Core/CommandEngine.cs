@@ -1,7 +1,6 @@
 ﻿using Releaser.Core.Commands;
 using Releaser.Core.Handlers;
 using Releaser.Core.Ioc;
-using Releaser.Core.MongoDb;
 using Releaser.Core.Results;
 
 namespace Releaser.Core

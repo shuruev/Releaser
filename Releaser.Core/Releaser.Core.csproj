@@ -89,8 +89,6 @@
     <Compile Include="Commands\CreateProjectCommand.cs" />
     <Compile Include="Handlers\CreateProjectCommandHandler.cs" />
     <Compile Include="Entities\Project.cs" />
-    <Compile Include="MongoDb\IMongoDb.cs" />
-    <Compile Include="MongoDb\MongoDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\EmptyResult.cs" />
   </ItemGroup>
