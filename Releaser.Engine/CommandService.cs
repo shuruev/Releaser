@@ -9,7 +9,7 @@ namespace Releaser.Engine
 {
 	public class CommandService : RestServiceBase<CommandDto>
 	{
-		private CommandEngine m_engine = new CommandEngine();
+		private CommandHandler m_engine = new CommandHandler();
 
 		public override object OnPost(CommandDto requestCommand)
 		{

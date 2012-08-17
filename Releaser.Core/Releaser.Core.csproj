@@ -81,17 +81,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\EngineClient.cs" />
-    <Compile Include="CommandEngine.cs" />
+    <Compile Include="CommandHandler.cs" />
     <Compile Include="Dto\CommandDto.cs" />
     <Compile Include="Exceptions\CommandNotSupportedException.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
-    <Compile Include="Handlers\BaseCommandHandler.cs" />
     <Compile Include="Ioc\AutofacResolver.cs" />
     <Compile Include="Ioc\IResolver.cs" />
-    <Compile Include="Handlers\ICommandHandler.cs" />
-    <Compile Include="CommandHandlersFactory.cs" />
     <Compile Include="Commands\CreateProjectCommand.cs" />
-    <Compile Include="Handlers\CreateProjectCommandHandler.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

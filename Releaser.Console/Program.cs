@@ -2,7 +2,6 @@
 using Releaser.Core.Client;
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
-using Releaser.Core.Handlers;
 using Releaser.Core.Ioc;
 
 namespace Releaser.Console
@@ -32,14 +31,6 @@ namespace Releaser.Console
 			command.Project.DisplayName = "New project";
 
 			engine.ExecuteCommand(command);*/
-		}
-
-		private static AutofacResolver GetResolver()
-		{
-			ContainerBuilder builder = new ContainerBuilder();
-			builder.RegisterType<CreateProjectCommandHandler>();
-
-			return new AutofacResolver(builder.Build());
 		}
 	}
 }

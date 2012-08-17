@@ -7,9 +7,6 @@ namespace Releaser.Engine
 	{
 		private static void Main(string[] args)
 		{
-			CommandHandlersFactory factory = new CommandHandlersFactory();
-			factory.RegisterAll();
-
 			if (Environment.UserInteractive)
 			{
 				var listeningOn = args.Length == 0 ? "http://localhost:5557/" : args[0];
