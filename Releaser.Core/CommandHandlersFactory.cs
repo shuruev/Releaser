@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Releaser.Core.Commands;
 using Releaser.Core.Handlers;
-using Releaser.Core.Ioc;
 
 namespace Releaser.Core
 {
@@ -10,26 +12,17 @@ namespace Releaser.Core
 	/// </summary>
 	public class CommandHandlersFactory
 	{
-		private readonly IResolver m_resolver;
 		private readonly Dictionary<string, ICommandHandler> m_commandHandlers = new Dictionary<string, ICommandHandler>();
-
-		/// <summary>
-		/// Initializes a new instance.
-		/// </summary>
-		public CommandHandlersFactory(IResolver resolver)
-		{
-			m_resolver = resolver;
-		}
 
 		/// <summary>
 		/// Registers handler for command.
 		/// </summary>
 		public void Register<TCommand, THandler>()
 			where TCommand : BaseCommand, new()
-			where THandler : ICommandHandler
+			where THandler : ICommandHandler, new()
 		{
 			var command = new TCommand();
-			var handler = m_resolver.Resolve<THandler>();
+			var handler = new THandler();
 
 			m_commandHandlers[command.Name] = handler;
 		}
@@ -44,6 +37,32 @@ namespace Releaser.Core
 				return m_commandHandlers[commandName];
 
 			return null;
+		}
+
+		/// <summary>
+		/// Registers all handlers from all assemblies.
+		/// </summary>
+		public void RegisterAll()
+		{
+			var commandType = typeof(BaseCommand);
+			var commandTypes = AppDomain.CurrentDomain
+				.GetAssemblies()
+				.SelectMany(s => s.GetTypes())
+				.Where(p => commandType.IsAssignableFrom(p) && p != commandType)
+				.ToList();
+
+			var handlerType = typeof(ICommandHandler);
+			var handlerTypes = AppDomain.CurrentDomain
+				.GetAssemblies()
+				.SelectMany(s => s.GetTypes())
+				.Where(p => handlerType.IsAssignableFrom(p) && !p.IsAbstract && p.BaseType != null)
+				.ToDictionary(v => v.BaseType.GetGenericArguments()[0]);
+
+			foreach (Type type in commandTypes)
+			{
+				BaseCommand command = (BaseCommand)Activator.CreateInstance(type);
+				m_commandHandlers[command.Name] = (ICommandHandler)Activator.CreateInstance(handlerTypes[type]);
+			}
 		}
 	}
 }

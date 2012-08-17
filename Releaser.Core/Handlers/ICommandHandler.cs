@@ -1,5 +1,4 @@
 using Releaser.Core.Commands;
-using Releaser.Core.Results;
 
 namespace Releaser.Core.Handlers
 {
@@ -11,6 +10,6 @@ namespace Releaser.Core.Handlers
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		BaseResult Execute(BaseCommand command);
+		void Execute(BaseCommand command);
 	}
 }

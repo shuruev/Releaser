@@ -1,7 +1,6 @@
 ﻿using Releaser.Core.Commands;
 using Releaser.Core.Handlers;
 using Releaser.Core.Ioc;
-using Releaser.Core.Results;
 
 namespace Releaser.Core
 {
@@ -15,20 +14,21 @@ namespace Releaser.Core
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public CommandEngine(IResolver resolver)
+		public CommandEngine()
 		{
 			// TODO: Do it automatically
-			m_handlersFactory = new CommandHandlersFactory(resolver);
-			m_handlersFactory.Register<CreateProjectCommand, CreateProjectCommandHandler>();
+			m_handlersFactory = new CommandHandlersFactory();
+			m_handlersFactory.RegisterAll();
+			//m_handlersFactory.Register<CreateProjectCommand, CreateProjectCommandHandler>();
 		}
 
 		/// <summary>
 		/// Executes command.
 		/// </summary>
-		public BaseResult ExecuteCommand(BaseCommand command)
+		public void ExecuteCommand(BaseCommand command)
 		{
 			ICommandHandler handler = m_handlersFactory.Resolve(command.Name);
-			return handler.Execute(command);
+			handler.Execute(command);
 		}
 	}
 }

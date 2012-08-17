@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Releaser.Core;
+using Releaser.Core.Client;
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
 using Releaser.Core.Handlers;
@@ -11,7 +11,17 @@ namespace Releaser.Console
 	{
 		private static void Main()
 		{
-			AutofacResolver resolver = GetResolver();
+			EngineClient client = new EngineClient("http://localhost:5557");
+
+			var command = new CreateProjectCommand();
+			command.Project = new Project();
+			command.Project.Name = "NewProject";
+			command.Project.Path = "PublicationStorage";
+			command.Project.DisplayName = "New project";
+
+			client.SendCommand(command);
+
+			/*AutofacResolver resolver = GetResolver();
 
 			CommandEngine engine = new CommandEngine(resolver);
 
@@ -21,14 +31,13 @@ namespace Releaser.Console
 			command.Project.Path = "PublicationStorage";
 			command.Project.DisplayName = "New project";
 
-			engine.ExecuteCommand(command);
+			engine.ExecuteCommand(command);*/
 		}
 
 		private static AutofacResolver GetResolver()
 		{
 			ContainerBuilder builder = new ContainerBuilder();
 			builder.RegisterType<CreateProjectCommandHandler>();
-				
 
 			return new AutofacResolver(builder.Build());
 		}
