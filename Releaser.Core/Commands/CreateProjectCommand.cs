@@ -1,3 +1,4 @@
+using ProtoBuf;
 using Releaser.Core.Entities;
 
 namespace Releaser.Core.Commands

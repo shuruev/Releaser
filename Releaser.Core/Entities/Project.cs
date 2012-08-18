@@ -1,4 +1,5 @@
 ﻿using System;
+using ProtoBuf;
 
 namespace Releaser.Core.Entities
 {

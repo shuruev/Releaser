@@ -1,5 +1,4 @@
 ﻿using System;
-using Releaser.Core;
 
 namespace Releaser.Engine
 {
