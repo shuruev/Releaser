@@ -1,5 +1,5 @@
-﻿using System;
-using ProtoBuf;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Releaser.Core.Commands
 {
@@ -11,14 +11,10 @@ namespace Releaser.Core.Commands
 		/// <summary>
 		/// Gets command name.
 		/// </summary>
+		[JsonIgnore]
 		public string Name
 		{
 			get { return GetType().FullName; }
 		}
-
-		/// <summary>
-		/// Gets or sets time when command was stored.
-		/// </summary>
-		public DateTime StoreTime { get; set; }
 	}
 }

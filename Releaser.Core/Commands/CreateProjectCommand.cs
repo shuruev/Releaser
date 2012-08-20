@@ -1,6 +1,3 @@
-using ProtoBuf;
-using Releaser.Core.Entities;
-
 namespace Releaser.Core.Commands
 {
 	/// <summary>
@@ -9,8 +6,18 @@ namespace Releaser.Core.Commands
 	public class CreateProjectCommand : BaseCommand
 	{
 		/// <summary>
-		/// Gets or sets project.
+		/// Gets or sets project name.
 		/// </summary>
-		public Project Project { get; set; }
+		public string ProjectName { get; set; }
+
+		/// <summary>
+		/// Gets or sets project display name.
+		/// </summary>
+		public string ProjectDisplayName { get; set; }
+
+		/// <summary>
+		/// Gets or sets path to project version.
+		/// </summary>
+		public string ProjectPath { get; set; }
 	}
 }

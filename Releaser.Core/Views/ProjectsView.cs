@@ -45,8 +45,6 @@ namespace Releaser.Core.Views
 
 		private void HandleCreateProject(CreateProjectCommand command)
 		{
-			if (!m_projects.TryAdd(command.Project.Name, command.Project))
-				throw new ArgumentException(string.Format("Project with name '{0}' exists in database."));
 		}
 	}
 }

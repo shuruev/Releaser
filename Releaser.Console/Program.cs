@@ -32,18 +32,24 @@ namespace ReleaserConsole
 			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);
 			Console.ReadKey();*/
 
-			for (int i = 0; i < 2; i++)
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
+
+			for (int i = 0; i < 10000; i++)
 			{
 				EngineClient client = new EngineClient("http://localhost:5557");
 
 				var command = new CreateProjectCommand();
-				command.Project = new Project();
-				command.Project.Name = "NewProject";
-				command.Project.Path = "PublicationStorage";
-				command.Project.DisplayName = "New project";
+				command.ProjectName = "NewProject " + i;
+				command.ProjectPath = "PublicationStorage";
+				command.ProjectDisplayName = "New project";
 
 				client.SendCommand(command);
 			}
+
+			sw.Stop();
+			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);
+			Console.ReadKey();
 
 			/*sw.Stop();
 			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);

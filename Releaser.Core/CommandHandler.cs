@@ -1,5 +1,4 @@
-﻿using System;
-using Releaser.Core.Commands;
+﻿using Releaser.Core.Commands;
 using Releaser.Core.CommandStore;
 using Releaser.Core.Denormalizer;
 
@@ -8,7 +7,7 @@ namespace Releaser.Core
 	/// <summary>
 	/// Engine for executing commands.
 	/// </summary>
-	public class CommandHandler : IDisposable
+	public class CommandHandler
 	{
 		private readonly ICommandStore m_store;
 		private readonly IDenormalizer m_denormalizer;
@@ -31,14 +30,6 @@ namespace Releaser.Core
 		{
 			m_denormalizer.Denormalize(command);
 			m_store.SaveCommand(command);
-		}
-
-		/// <summary>
-		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-		/// </summary>
-		public void Dispose()
-		{
-			m_store.Dispose();
 		}
 	}
 }

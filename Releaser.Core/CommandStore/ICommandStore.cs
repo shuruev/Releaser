@@ -7,7 +7,7 @@ namespace Releaser.Core.CommandStore
 	/// <summary>
 	/// Interface for storing commands.
 	/// </summary>
-	public interface ICommandStore : IDisposable
+	public interface ICommandStore
 	{
 		/// <summary>
 		/// Saves command to a store.
