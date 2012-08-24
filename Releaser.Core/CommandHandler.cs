@@ -9,14 +9,14 @@ namespace Releaser.Core
 	/// </summary>
 	public class CommandHandler
 	{
-		private readonly ICommandStore m_store;
+		private readonly IEventStore m_store;
 		private readonly IDenormalizer m_denormalizer;
 
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
 		public CommandHandler(
-			ICommandStore store,
+			IEventStore store,
 			IDenormalizer denormalizer)
 		{
 			m_store = store;
@@ -29,7 +29,7 @@ namespace Releaser.Core
 		public void ExecuteCommand(BaseCommand command)
 		{
 			m_denormalizer.Denormalize(command);
-			m_store.SaveCommand(command);
+			//m_store.SaveEvent(command);
 		}
 	}
 }

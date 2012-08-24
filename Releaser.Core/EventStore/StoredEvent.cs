@@ -3,22 +3,22 @@
 namespace Releaser.Core.CommandStore
 {
 	/// <summary>
-	/// Entity for storing commands.
+	/// Entity for storing events.
 	/// </summary>
 	public class StoredCommand
 	{
 		/// <summary>
-		/// Gets or sets type of command.
+		/// Gets or sets type of event.
 		/// </summary>
 		public string Type { get; set; }
 
 		/// <summary>
-		/// Gets or sets time when command was stored.
+		/// Gets or sets time when event was stored.
 		/// </summary>
 		public DateTime StoreTime { get; set; }
 
 		/// <summary>
-		/// Gets or sets Json presenatatin of command.
+		/// Gets or sets Json presenatatin of event.
 		/// </summary>
 		public string Json { get; set; }
 	}

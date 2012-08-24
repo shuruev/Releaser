@@ -14,7 +14,7 @@ namespace Releaser.Engine
 		static Context()
 		{
 			Handler = new CommandHandler(
-				new FileCommandStore("commands.bin"),
+				new FileEventStore("commands.bin"),
 				new Denormalizer(new ViewFactory()));
 		}
 

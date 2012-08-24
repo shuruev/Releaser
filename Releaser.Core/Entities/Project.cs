@@ -1,12 +1,11 @@
 ﻿using System;
-using ProtoBuf;
 
 namespace Releaser.Core.Entities
 {
 	/// <summary>
 	/// Entity project.
 	/// </summary>
-	public class Project
+	public class Project : AggregateRoot
 	{
 		/// <summary>
 		/// Gets or sets entity identifier.

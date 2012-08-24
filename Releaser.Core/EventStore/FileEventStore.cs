@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Releaser.Core.Commands;
+using Releaser.Core.Events;
 using ServiceStack.Text;
 using JsonSerializer = ServiceStack.Text.JsonSerializer;
 
@@ -11,7 +11,7 @@ namespace Releaser.Core.CommandStore
 	/// <summary>
 	/// Stores data to append-only file.
 	/// </summary>
-	public class FileCommandStore : ICommandStore
+	public class FileEventStore : IEventStore
 	{
 		private readonly string m_filePath;
 		private readonly object m_sync = new object();
@@ -19,20 +19,20 @@ namespace Releaser.Core.CommandStore
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public FileCommandStore(string filePath)
+		public FileEventStore(string filePath)
 		{
 			m_filePath = filePath;
 		}
 
 		/// <summary>
-		/// Saves command to a store.
+		/// Saves event to a store.
 		/// </summary>
-		public void SaveCommand(BaseCommand command)
+		public void SaveEvent(BaseEvent @event)
 		{
 			var sc = new StoredCommand
 			{
-				Type = command.GetType().FullName,
-				Json = JsonConvert.SerializeObject(command),
+				Type = @event.GetType().FullName,
+				Json = JsonConvert.SerializeObject(@event),
 				StoreTime = DateTime.UtcNow
 			};
 
@@ -49,9 +49,9 @@ namespace Releaser.Core.CommandStore
 		}
 
 		/// <summary>
-		/// Reads all commands.
+		/// Reads all events.
 		/// </summary>
-		public IEnumerable<BaseCommand> ReadAllCommands()
+		public IEnumerable<BaseEvent> ReadAllEvents()
 		{
 			lock (m_sync)
 			{
@@ -65,7 +65,7 @@ namespace Releaser.Core.CommandStore
 						string json = data.FromUtf8Bytes();
 						var sc = JsonSerializer.DeserializeFromString<StoredCommand>(json);
 						var type = AssemblyUtils.FindType(sc.Type);
-						yield return (BaseCommand)JsonSerializer.DeserializeFromString(sc.Json, type);
+						yield return (BaseEvent)JsonSerializer.DeserializeFromString(sc.Json, type);
 					}
 				}
 			}

@@ -92,13 +92,16 @@
   <ItemGroup>
     <Compile Include="Client\EngineClient.cs" />
     <Compile Include="CommandHandler.cs" />
-    <Compile Include="CommandStore\FileCommandStore.cs" />
-    <Compile Include="CommandStore\StoredCommand.cs" />
+    <Compile Include="Entities\AggregateRoot.cs" />
+    <Compile Include="EventStore\FileEventStore.cs" />
+    <Compile Include="EventStore\StoredEvent.cs" />
     <Compile Include="Denormalizer\Denormalizer.cs" />
     <Compile Include="Dto\CommandDto.cs" />
+    <Compile Include="Events\BaseEvent.cs" />
+    <Compile Include="Events\ProjectCreated.cs" />
     <Compile Include="Exceptions\CommandNotSupportedException.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
-    <Compile Include="CommandStore\ICommandStore.cs" />
+    <Compile Include="EventStore\IEventStore.cs" />
     <Compile Include="Denormalizer\IDenormalizer.cs" />
     <Compile Include="Ioc\AutofacResolver.cs" />
     <Compile Include="Ioc\IResolver.cs" />
