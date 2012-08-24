@@ -91,7 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\EngineClient.cs" />
-    <Compile Include="CommandHandler.cs" />
+    <Compile Include="CommandHandlers\BaseCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CommandHandlerFactory.cs" />
+    <Compile Include="CommandHandlers\ICommandHandler.cs" />
+    <Compile Include="CommandHandlers\ProjectCommandHandler.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="EventStore\FileEventStore.cs" />
     <Compile Include="EventStore\StoredEvent.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Commands\CreateProjectCommand.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DelegateAdjuster.cs" />
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\IViewFactory.cs" />
     <Compile Include="Views\ProjectsView.cs" />

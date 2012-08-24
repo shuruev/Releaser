@@ -1,8 +1,5 @@
-﻿using System;
-using Releaser.Core;
-using Releaser.Core.CommandStore;
-using Releaser.Core.Denormalizer;
-using Releaser.Core.Views;
+﻿using Releaser.Core.CommandHandlers;
+using Releaser.Core.Commands;
 
 namespace Releaser.Engine
 {
@@ -13,15 +10,13 @@ namespace Releaser.Engine
 	{
 		static Context()
 		{
-			Handler = new CommandHandler(
-				new FileEventStore("commands.bin"),
-				new Denormalizer(new ViewFactory()));
+			HandlerFactory = new CommandHandlerFactory();
 		}
 
 		/// <summary>
 		/// Gets commands handler.
 		/// </summary>
-		public static CommandHandler Handler
+		public static CommandHandlerFactory HandlerFactory
 		{
 			get; private set;
 		}

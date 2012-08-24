@@ -1,10 +1,6 @@
-using System;
-using Releaser.Core;
+using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
-using Releaser.Core.CommandStore;
-using Releaser.Core.Denormalizer;
 using Releaser.Core.Dto;
-using Releaser.Core.Views;
 using ServiceStack.ServiceInterface;
 using ServiceStack.Text;
 
@@ -15,14 +11,14 @@ namespace Releaser.Engine
 	/// </summary>
 	public class CommandService : RestServiceBase<CommandDto>
 	{
-		private readonly CommandHandler m_handler;
+		private readonly CommandHandlerFactory m_factory;
 
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
 		public CommandService()
 		{
-			m_handler = Context.Handler;
+			m_factory = Context.HandlerFactory;
 		}
 
 
@@ -32,7 +28,7 @@ namespace Releaser.Engine
 		public override object OnPost(CommandDto requestCommand)
 		{
 			BaseCommand command = requestCommand.Json.FromJson<BaseCommand>();
-			m_handler.ExecuteCommand(command);
+			m_factory.ExecuteCommand(command);
 			return null;
 		}
 	}
