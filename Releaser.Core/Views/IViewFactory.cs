@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Releaser.Core.Commands;
+using Releaser.Core.Events;
 
 namespace Releaser.Core.Views
 {
@@ -11,6 +12,6 @@ namespace Releaser.Core.Views
 		/// <summary>
 		/// Return list of affected views.
 		/// </summary>
-		List<IView> GetAffectedViews(BaseCommand command);
+		List<IView> GetAffectedViews(BaseEvent @event);
 	}
 }

@@ -27,23 +27,27 @@ namespace Releaser.Core.CommandStore
 		/// <summary>
 		/// Saves event to a store.
 		/// </summary>
-		public void SaveEvent(BaseEvent @event)
+		public void SaveEvents(IEnumerable<BaseEvent> events)
 		{
-			var sc = new StoredCommand
-			{
-				Type = @event.GetType().FullName,
-				Json = JsonConvert.SerializeObject(@event),
-				StoreTime = DateTime.UtcNow
-			};
-
-			byte[] data = JsonConvert.SerializeObject(sc).ToUtf8Bytes();
-			byte[] size = BitConverter.GetBytes(data.Length);
 			lock (m_sync)
 			{
 				using (var writer = new FileStream(m_filePath, FileMode.Append, FileAccess.Write))
 				{
-					writer.Write(size, 0, size.Length);
-					writer.Write(data, 0, data.Length);
+					foreach (BaseEvent @event in events)
+					{
+						var sc = new StoredCommand
+						{
+							Type = @event.GetType().FullName,
+							Json = JsonConvert.SerializeObject(@event),
+							StoreTime = DateTime.UtcNow
+						};
+
+						byte[] data = JsonConvert.SerializeObject(sc).ToUtf8Bytes();
+						byte[] size = BitConverter.GetBytes(data.Length);
+
+						writer.Write(size, 0, size.Length);
+						writer.Write(data, 0, data.Length);
+					}
 				}
 			}
 		}

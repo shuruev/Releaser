@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
+using Releaser.Core.Events;
 using Releaser.Core.Exceptions;
 
 namespace Releaser.Core.Views
@@ -18,13 +19,13 @@ namespace Releaser.Core.Views
 		/// Gets list of command classes which change view.
 		/// Todo: Rework with attributes.
 		/// </summary>
-		public List<string> SupportedCommands
+		public List<string> SupportedEvents
 		{
 			get
 			{
 				return new List<string>
 				{
-					typeof(CreateProjectCommand).FullName
+					typeof(ProjectCreated).FullName
 				};
 			}
 		}
@@ -32,18 +33,18 @@ namespace Releaser.Core.Views
 		/// <summary>
 		/// Handles command and changes the view.
 		/// </summary>
-		public void Handle(BaseCommand command)
+		public void Apply(BaseEvent @event)
 		{
-			if (command is CreateProjectCommand)
+			if (@event is ProjectCreated)
 			{
-				HandleCreateProject(command as CreateProjectCommand);
+				ApplyCreateProject(@event as ProjectCreated);
 				return;
 			}
 
-			throw new CommandNotSupportedException(command);
+			throw new EventNotSupportedException(@event);
 		}
 
-		private void HandleCreateProject(CreateProjectCommand command)
+		private void ApplyCreateProject(ProjectCreated @event)
 		{
 		}
 	}

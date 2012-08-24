@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Releaser.Core.Commands;
+using Releaser.Core.CommandStore;
+using Releaser.Core.Denormalizer;
 
 namespace Releaser.Core.CommandHandlers
 {
@@ -49,17 +51,10 @@ namespace Releaser.Core.CommandHandlers
 		/// <summary>
 		/// Handles command by handler from the factory.
 		/// </summary>
-		public void ExecuteCommand<T>(T command) where T : BaseCommand
+		public ICommandHandler ResolveHandler<T>(T command) where T : BaseCommand
 		{
 			ICommandHandler handler;
-			if (m_handlers.TryGetValue(command.Name, out handler))
-			{
-				handler.Execute(command);
-			}
-			else
-			{
-				throw new InvalidOperationException("No handler registered.");
-			}
+			return m_handlers.TryGetValue(command.Name, out handler) ? handler : null;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Releaser.Core.Commands;
+using Releaser.Core.Events;
 
 namespace Releaser.Core.Views
 {
@@ -11,11 +12,11 @@ namespace Releaser.Core.Views
 		/// <summary>
 		/// Gets list of command classes which change view.
 		/// </summary>
-		List<string> SupportedCommands { get; }
+		List<string> SupportedEvents { get; }
 
 		/// <summary>
 		/// Handles command and changes the view.
 		/// </summary>
-		void Handle(BaseCommand command);
+		void Apply(BaseEvent @event);
 	}
 }

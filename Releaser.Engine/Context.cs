@@ -1,5 +1,9 @@
-﻿using Releaser.Core.CommandHandlers;
+﻿using Releaser.Core;
+using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
+using Releaser.Core.CommandStore;
+using Releaser.Core.Denormalizer;
+using Releaser.Core.Views;
 
 namespace Releaser.Engine
 {
@@ -10,15 +14,16 @@ namespace Releaser.Engine
 	{
 		static Context()
 		{
-			HandlerFactory = new CommandHandlerFactory();
+			Engine = new CommandEngine(
+				new CommandHandlerFactory(),
+				new FileEventStore("EventStore.dat"),
+				new Denormalizer(
+					new ViewFactory()));
 		}
 
 		/// <summary>
-		/// Gets commands handler.
+		/// Gets static command engine.
 		/// </summary>
-		public static CommandHandlerFactory HandlerFactory
-		{
-			get; private set;
-		}
+		public static CommandEngine Engine { get; private set; }
 	}
 }

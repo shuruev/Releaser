@@ -11,7 +11,7 @@ namespace Releaser.Core.CommandStore
 		/// <summary>
 		/// Saves event to a store.
 		/// </summary>
-		void SaveEvent(BaseEvent @event);
+		void SaveEvents(IEnumerable<BaseEvent> events);
 
 		/// <summary>
 		/// Reads all events.

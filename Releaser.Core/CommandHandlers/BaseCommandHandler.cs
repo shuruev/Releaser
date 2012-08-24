@@ -1,5 +1,7 @@
-﻿using Releaser.Core.CommandHandlers;
+﻿using System.Collections.Generic;
+using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
+using Releaser.Core.Events;
 using Releaser.Core.Exceptions;
 
 namespace Releaser.Core.Handlers
@@ -14,17 +16,17 @@ namespace Releaser.Core.Handlers
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		public void Execute(BaseCommand command)
+		public IEnumerable<BaseEvent> Execute(BaseCommand command)
 		{
 			if (!(command is T))
 				throw new CommandNotSupportedException(command);
 
-			ExecuteInternal(command as T);
+			return ExecuteInternal(command as T);
 		}
 
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		protected abstract void ExecuteInternal(T command);
+		protected abstract IEnumerable<BaseEvent> ExecuteInternal(T command);
 	}
 }

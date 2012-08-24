@@ -11,7 +11,6 @@ namespace Releaser.Core.Commands
 		/// <summary>
 		/// Gets command name.
 		/// </summary>
-		[JsonIgnore]
 		public string Name
 		{
 			get { return GetType().FullName; }

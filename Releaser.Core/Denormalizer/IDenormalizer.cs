@@ -1,4 +1,6 @@
-﻿using Releaser.Core.Commands;
+﻿using System.Collections.Generic;
+using Releaser.Core.Commands;
+using Releaser.Core.Events;
 
 namespace Releaser.Core.Denormalizer
 {
@@ -10,6 +12,6 @@ namespace Releaser.Core.Denormalizer
 		/// <summary>
 		/// Fills data in projections.
 		/// </summary>
-		void Denormalize(BaseCommand command);
+		void Denormalize(IEnumerable<BaseEvent> events);
 	}
 }

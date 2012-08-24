@@ -95,6 +95,7 @@
     <Compile Include="CommandHandlers\CommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
     <Compile Include="CommandHandlers\ProjectCommandHandler.cs" />
+    <Compile Include="CommandEngine.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="EventStore\FileEventStore.cs" />
     <Compile Include="EventStore\StoredEvent.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="EventStore\IEventStore.cs" />
     <Compile Include="Denormalizer\IDenormalizer.cs" />
+    <Compile Include="Exceptions\EventNotSupportedException.cs" />
     <Compile Include="Ioc\AutofacResolver.cs" />
     <Compile Include="Ioc\IResolver.cs" />
     <Compile Include="Commands\CreateProjectCommand.cs" />

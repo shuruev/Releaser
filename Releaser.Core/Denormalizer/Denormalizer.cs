@@ -1,4 +1,6 @@
-﻿using Releaser.Core.Commands;
+﻿using System.Collections.Generic;
+using Releaser.Core.Commands;
+using Releaser.Core.Events;
 using Releaser.Core.Views;
 
 namespace Releaser.Core.Denormalizer
@@ -21,10 +23,16 @@ namespace Releaser.Core.Denormalizer
 		/// <summary>
 		/// Fills data in projections.
 		/// </summary>
-		public void Denormalize(BaseCommand command)
+		public void Denormalize(IEnumerable<BaseEvent> events)
 		{
-			var views = m_factory.GetAffectedViews(command);
-			views.ForEach(v => v.Handle(command));
+			foreach (var @event in events)
+			{
+				var views = m_factory.GetAffectedViews(@event);
+				foreach (var view in views)
+				{
+					view.Apply(@event);
+				}
+			}
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using Releaser.Core.Commands;
+﻿using System.Collections.Generic;
+using Releaser.Core.Commands;
+using Releaser.Core.Events;
 
 namespace Releaser.Core.CommandHandlers
 {
@@ -10,6 +12,6 @@ namespace Releaser.Core.CommandHandlers
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		void Execute(BaseCommand command);
+		IEnumerable<BaseEvent> Execute(BaseCommand command);
 	}
 }

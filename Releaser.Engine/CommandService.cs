@@ -1,3 +1,4 @@
+using Releaser.Core;
 using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
 using Releaser.Core.Dto;
@@ -11,14 +12,14 @@ namespace Releaser.Engine
 	/// </summary>
 	public class CommandService : RestServiceBase<CommandDto>
 	{
-		private readonly CommandHandlerFactory m_factory;
+		private readonly CommandEngine m_engine;
 
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
 		public CommandService()
 		{
-			m_factory = Context.HandlerFactory;
+			m_engine = Context.Engine;
 		}
 
 		/// <summary>
@@ -27,7 +28,7 @@ namespace Releaser.Engine
 		public override object OnPost(CommandDto requestCommand)
 		{
 			BaseCommand command = requestCommand.Json.FromJson<BaseCommand>();
-			m_factory.ExecuteCommand(command);
+			m_engine.ExecuteCommand(command);
 			return null;
 		}
 	}

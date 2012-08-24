@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Releaser.Core.Commands;
+using Releaser.Core.Events;
 
 namespace Releaser.Core.Views
 {
@@ -26,7 +27,7 @@ namespace Releaser.Core.Views
 			foreach (Type viewType in viewTypes)
 			{
 				IView view = (IView)Activator.CreateInstance(viewType);
-				foreach (string command in view.SupportedCommands)
+				foreach (string command in view.SupportedEvents)
 				{
 					if (!m_views.ContainsKey(command))
 						m_views[command] = new List<IView>();
@@ -39,12 +40,12 @@ namespace Releaser.Core.Views
 		/// <summary>
 		/// Return list of affected views.
 		/// </summary>
-		public List<IView> GetAffectedViews(BaseCommand command)
+		public List<IView> GetAffectedViews(BaseEvent @event)
 		{
-			if (!m_views.ContainsKey(command.Name))
+			if (!m_views.ContainsKey(@event.Name))
 				return new List<IView>();
 
-			return m_views[command.Name];
+			return m_views[@event.Name];
 		}
 	}
 }
