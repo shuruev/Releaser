@@ -1,6 +1,9 @@
 ﻿namespace Releaser.Core.Events
 {
-	class ProjectCreated : BaseEvent
+	/// <summary>
+	/// Event which raises after project creation.
+	/// </summary>
+	public class ProjectCreated : BaseEvent
 	{
 	}
 }

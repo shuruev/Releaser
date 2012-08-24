@@ -25,7 +25,7 @@ namespace Releaser.Core.Views
 
 			foreach (Type viewType in viewTypes)
 			{
-				IView view = (IView) Activator.CreateInstance(viewType);
+				IView view = (IView)Activator.CreateInstance(viewType);
 				foreach (string command in view.SupportedCommands)
 				{
 					if (!m_views.ContainsKey(command))

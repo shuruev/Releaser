@@ -8,6 +8,9 @@ namespace Releaser.Core.CommandHandlers
 	/// </summary>
 	public class CreateProjectCommandHandler : BaseCommandHandler<CreateProjectCommand>
 	{
+		/// <summary>
+		/// Executes specified command.
+		/// </summary>
 		protected override void ExecuteInternal(CreateProjectCommand command)
 		{
 		}

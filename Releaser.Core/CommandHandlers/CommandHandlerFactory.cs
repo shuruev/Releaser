@@ -61,6 +61,5 @@ namespace Releaser.Core.CommandHandlers
 				throw new InvalidOperationException("No handler registered.");
 			}
 		}
-
 	}
 }

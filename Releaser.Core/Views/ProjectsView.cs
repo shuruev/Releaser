@@ -16,7 +16,7 @@ namespace Releaser.Core.Views
 
 		/// <summary>
 		/// Gets list of command classes which change view.
-		/// Todo: Rework with attributes?
+		/// Todo: Rework with attributes.
 		/// </summary>
 		public List<string> SupportedCommands
 		{
@@ -24,7 +24,7 @@ namespace Releaser.Core.Views
 			{
 				return new List<string>
 				{
-					typeof (CreateProjectCommand).FullName
+					typeof(CreateProjectCommand).FullName
 				};
 			}
 		}

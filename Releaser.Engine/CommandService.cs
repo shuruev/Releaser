@@ -21,7 +21,6 @@ namespace Releaser.Engine
 			m_factory = Context.HandlerFactory;
 		}
 
-
 		/// <summary>
 		/// Raises on POST request with command.
 		/// </summary>
