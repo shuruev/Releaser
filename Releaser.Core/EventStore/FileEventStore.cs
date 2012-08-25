@@ -54,6 +54,9 @@ namespace Releaser.Core.EventStore
 		{
 			lock (m_sync)
 			{
+				if (!File.Exists(m_filePath))
+					yield break;
+
 				using (var fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read))
 				using (var reader = new BinaryReader(fs, Encoding.UTF8))
 				{
