@@ -15,7 +15,8 @@ namespace Releaser.Core.Views
 	public class ProjectsView : IView
 	{
 		private readonly Dictionary<Guid, Project> m_projects = new Dictionary<Guid, Project>();
-		//private readonly ConcurrentDictionary<string, List<Release>> m_releases = new ConcurrentDictionary<string, List<Release>>();
+
+		// private readonly ConcurrentDictionary<string, List<Release>> m_releases = new ConcurrentDictionary<string, List<Release>>();
 
 		/// <summary>
 		/// Gets list of command classes which change view.

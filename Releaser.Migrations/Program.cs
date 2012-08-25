@@ -8,9 +8,9 @@ using Releaser.Core.Commands;
 
 namespace Releaser.Migrations
 {
-	class Program
+	public class Program
 	{
-		static void Main()
+		public static void Main()
 		{
 			EngineClient client = new EngineClient("http://localhost:5557");
 
@@ -51,6 +51,5 @@ namespace Releaser.Migrations
 				projectNodes.Count,
 				sw.ElapsedMilliseconds);
 		}
-
 	}
 }

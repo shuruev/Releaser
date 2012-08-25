@@ -61,7 +61,8 @@ namespace Releaser.Core.EventStore
 				using (var reader = new BinaryReader(fs, Encoding.UTF8))
 				{
 					int pos = 0;
-					int length = (int) reader.BaseStream.Length;
+					int length = (int)reader.BaseStream.Length;
+
 					while (pos < length)
 					{
 						var json = reader.ReadString();
@@ -69,7 +70,7 @@ namespace Releaser.Core.EventStore
 						var type = AssemblyUtils.FindType(sc.Type);
 						yield return (BaseEvent)JsonSerializer.DeserializeFromString(sc.Json, type);
 
-						pos += sizeof (int);
+						pos += sizeof(int);
 					}
 				}
 			}

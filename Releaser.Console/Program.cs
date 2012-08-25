@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using Releaser.Core.Client;
-using Releaser.Core.Commands;
 
 namespace ReleaserConsole
 {
@@ -14,8 +9,6 @@ namespace ReleaserConsole
 		{
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
-
-
 
 			sw.Stop();
 			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);

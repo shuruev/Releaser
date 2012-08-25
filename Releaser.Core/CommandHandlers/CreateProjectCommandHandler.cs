@@ -23,7 +23,6 @@ namespace Releaser.Core.CommandHandlers
 				command.ProjectType);
 
 			// What about saving the project to a store?
-
 			return project.GetChanges();
 		}
 	}
