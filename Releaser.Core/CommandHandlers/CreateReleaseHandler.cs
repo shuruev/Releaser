@@ -31,8 +31,7 @@ namespace Releaser.Core.CommandHandlers
 				command.VersionCode,
 				command.ProjectId,
 				command.UserId,
-				command.Comment
-				);
+				command.Comment);
 
 			m_store.Write(release);
 

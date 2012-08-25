@@ -11,21 +11,21 @@ namespace Releaser.Core.Events
 		/// Initializes a new instance.
 		/// </summary>
 		public ReleaseCommentChanged(
-			string id,
+			string releaseId,
 			string comment)
 		{
-			Id = id;
-			Comment = comment;
+			ReleaseId = releaseId;
+			ReleaseComment = comment;
 		}
 
 		/// <summary>
 		/// Gets release ID.
 		/// </summary>
-		public string Id { get; private set; }
+		public string ReleaseId { get; private set; }
 
 		/// <summary>
 		/// Gets new release comment.
 		/// </summary>
-		public string Comment { get; set; }
+		public string ReleaseComment { get; set; }
 	}
 }

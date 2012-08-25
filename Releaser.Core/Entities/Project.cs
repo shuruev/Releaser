@@ -11,6 +11,13 @@ namespace Releaser.Core.Entities
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
+		public Project()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
 		public Project(
 			string name,
 			string path,
@@ -30,28 +37,28 @@ namespace Releaser.Core.Entities
 		}
 
 		/// <summary>
-		/// Gets project name.
+		/// Gets or sets project name.
 		/// </summary>
-		public string Name { get; private set; }
+		public string Name { get; set; }
 
 		/// <summary>
-		/// Gets path to project version.
+		/// Gets or sets path to project version.
 		/// </summary>
-		public string Path { get; private set; }
+		public string Path { get; set; }
 
 		/// <summary>
-		/// Gets type of storage.
+		/// Gets or sets type of storage.
 		/// </summary>
-		public string StorageType { get; private set; }
+		public string StorageType { get; set; }
 
 		/// <summary>
-		/// Gets type of project.
+		/// Gets or sets type of project.
 		/// </summary>
-		public string ProjectType { get; private set; }
+		public string ProjectType { get; set; }
 
 		/// <summary>
-		/// Gets project creation date.
+		/// Gets or sets project creation date.
 		/// </summary>
-		public DateTime CreationDate { get; private set; }
+		public DateTime CreationDate { get; set; }
 	}
 }

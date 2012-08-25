@@ -126,7 +126,7 @@
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\IViewFactory.cs" />
     <Compile Include="Views\ProjectsView.cs" />
-    <Compile Include="Views\ViewsFactory.cs" />
+    <Compile Include="Views\ViewFactory.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -66,7 +66,7 @@ namespace Releaser.Migrations
 
 			var xml = XElement.Parse(dataFile);
 
-			var releaseNodes = xml.Elements("Release").ToList();
+			var releaseNodes = xml.Elements("ReleaseId").ToList();
 			foreach (XElement releaseNode in releaseNodes)
 			{
 				var command = new CreateRelease();

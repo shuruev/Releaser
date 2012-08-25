@@ -11,6 +11,13 @@ namespace Releaser.Core.Entities
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
+		public Release()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
 		public Release(
 			string code,
 			string versionCode,
@@ -30,29 +37,29 @@ namespace Releaser.Core.Entities
 		}
 
 		/// <summary>
-		/// Gets release version code.
+		/// Gets or sets release version code.
 		/// </summary>
-		public string VersionCode { get; private set; }
+		public string VersionCode { get; set; }
 
 		/// <summary>
-		/// Gets project ID.
+		/// Gets or sets project ID.
 		/// </summary>
-		public string ProjectId { get; private set; }
+		public string ProjectId { get; set; }
 
 		/// <summary>
-		/// Gets user ID.
+		/// Gets or sets user ID.
 		/// </summary>
-		public string UserId { get; private set; }
+		public string UserId { get; set; }
 
 		/// <summary>
-		/// Gets release date.
+		/// Gets or sets release date.
 		/// </summary>
-		public DateTime ReleaseDate { get; private set; }
+		public DateTime ReleaseDate { get; set; }
 
 		/// <summary>
-		/// Gets release comment.
+		/// Gets or sets release comment.
 		/// </summary>
-		public string Comment { get; private set; }
+		public string Comment { get; set; }
 
 		/// <summary>
 		/// Changes release comment.

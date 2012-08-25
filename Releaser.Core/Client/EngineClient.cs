@@ -6,7 +6,7 @@ using ServiceStack.Text;
 namespace Releaser.Core.Client
 {
 	/// <summary>
-	/// Client for Release engine service.
+	/// Client for ReleaseId engine service.
 	/// </summary>
 	public class EngineClient
 	{
@@ -21,7 +21,7 @@ namespace Releaser.Core.Client
 		}
 
 		/// <summary>
-		/// Sends command to Release engine.
+		/// Sends command to ReleaseId engine.
 		/// </summary>
 		public void SendCommand(BaseCommand command)
 		{

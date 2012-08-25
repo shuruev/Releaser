@@ -12,9 +12,9 @@ namespace Releaser.Core.Entities
 		private readonly List<BaseEvent> m_changes = new List<BaseEvent>();
 
 		/// <summary>
-		/// Gets aggregate root ID.
+		/// Gets or sets aggregate root ID.
 		/// </summary>
-		public string Id { get; protected set; }
+		public string Id { get; set; }
 
 		/// <summary>
 		/// Returns all changes with entity.
