@@ -4,8 +4,6 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 using Releaser.Core.Events;
-using ServiceStack.Text;
-using JsonSerializer = ServiceStack.Text.JsonSerializer;
 
 namespace Releaser.Core.EventStore
 {
@@ -66,9 +64,9 @@ namespace Releaser.Core.EventStore
 					while (pos < length)
 					{
 						var json = reader.ReadString();
-						var sc = JsonSerializer.DeserializeFromString<StoredCommand>(json);
-						var type = AssemblyUtils.FindType(sc.Type);
-						yield return (BaseEvent)JsonSerializer.DeserializeFromString(sc.Json, type);
+						var sc = JsonConvert.DeserializeObject<StoredCommand>(json);
+						var type = Type.GetType(sc.Type);
+						yield return (BaseEvent) JsonConvert.DeserializeObject(sc.Json, type);
 
 						pos += sizeof(int);
 					}
