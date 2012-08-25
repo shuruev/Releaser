@@ -70,8 +70,8 @@ namespace Releaser.Migrations
 			foreach (XElement releaseNode in releaseNodes)
 			{
 				var command = new CreateRelease();
-				command.ProjectId = Guid.Parse(releaseNode.Element("ProjectUid").Value);
-				command.UserId = Guid.Parse(releaseNode.Element("UserUid").Value);
+				command.ProjectId = releaseNode.Element("ProjectUid").Value;
+				command.UserId = releaseNode.Element("UserUid").Value;
 				command.VersionCode = releaseNode.Element("VersionCode").Value;
 				command.Comment = releaseNode.Element("ReleaseComment").Value;
 

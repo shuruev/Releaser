@@ -92,14 +92,18 @@
   <ItemGroup>
     <Compile Include="Client\EngineClient.cs" />
     <Compile Include="CommandHandlers\BaseCommandHandler.cs" />
+    <Compile Include="CommandHandlers\ChangeReleaseCommentHandler.cs" />
     <Compile Include="CommandHandlers\CommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\CreateReleaseHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateProjectHandler.cs" />
     <Compile Include="CommandEngine.cs" />
+    <Compile Include="Commands\ChangeReleaseComment.cs" />
     <Compile Include="Commands\CreateRelease.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Entities\Release.cs" />
+    <Compile Include="Events\ReleaseCommentChanged.cs" />
+    <Compile Include="EntityStore\FileEntityStore.cs" />
     <Compile Include="Events\ReleaseCreated.cs" />
     <Compile Include="EventStore\FileEventStore.cs" />
     <Compile Include="EventStore\StoredEvent.cs" />
@@ -117,14 +121,14 @@
     <Compile Include="Commands\CreateProject.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EntityStore\IEntityStore.cs" />
+    <Compile Include="Utils\StringExtentions.cs" />
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\IViewFactory.cs" />
     <Compile Include="Views\ProjectsView.cs" />
     <Compile Include="Views\ViewsFactory.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

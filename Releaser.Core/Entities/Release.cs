@@ -14,31 +14,20 @@ namespace Releaser.Core.Entities
 		public Release(
 			string code,
 			string versionCode,
-			Guid projectId,
-			Guid userId,
+			string projectId,
+			string userId,
 			string comment)
 		{
-			Code = code;
 			VersionCode = versionCode;
 			ProjectId = projectId;
 			UserId = userId;
 			Comment = comment;
 
-			Id = Guid.NewGuid();
+			Id = code;
 			ReleaseDate = DateTime.UtcNow;
 
 			Apply(new ReleaseCreated(this));
 		}
-
-		/// <summary>
-		/// Gets release ID.
-		/// </summary>
-		public Guid Id { get; private set; }
-
-		/// <summary>
-		/// Gets release code.
-		/// </summary>
-		public string Code { get; private set; }
 
 		/// <summary>
 		/// Gets release version code.
@@ -48,12 +37,12 @@ namespace Releaser.Core.Entities
 		/// <summary>
 		/// Gets project ID.
 		/// </summary>
-		public Guid ProjectId { get; private set; }
+		public string ProjectId { get; private set; }
 
 		/// <summary>
 		/// Gets user ID.
 		/// </summary>
-		public Guid UserId { get; private set; }
+		public string UserId { get; private set; }
 
 		/// <summary>
 		/// Gets release date.
@@ -64,5 +53,14 @@ namespace Releaser.Core.Entities
 		/// Gets release comment.
 		/// </summary>
 		public string Comment { get; private set; }
+
+		/// <summary>
+		/// Changes release comment.
+		/// </summary>
+		public void ChangeComment(string comment)
+		{
+			Comment = comment;
+			Apply(new ReleaseCommentChanged(Id, comment));
+		}
 	}
 }

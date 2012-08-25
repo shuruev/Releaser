@@ -13,8 +13,8 @@ namespace Releaser.Core.Views
 	/// </summary>
 	public class ProjectsView : IView
 	{
-		private readonly Dictionary<Guid, Project> m_projects = new Dictionary<Guid, Project>();
-		private readonly Dictionary<Guid, List<Release>> m_releases = new Dictionary<Guid, List<Release>>();
+		private readonly Dictionary<string, Project> m_projects = new Dictionary<string, Project>();
+		private readonly Dictionary<string, List<Release>> m_releases = new Dictionary<string, List<Release>>();
 
 		/// <summary>
 		/// Gets list of command classes which change view.

@@ -9,14 +9,6 @@ namespace Releaser.Core.Events
 	public class BaseEvent
 	{
 		/// <summary>
-		/// Initializes a new instance.
-		/// </summary>
-		public BaseEvent()
-		{
-			CreationTime = DateTime.UtcNow;
-		}
-
-		/// <summary>
 		/// Gets command name.
 		/// </summary>
 		[JsonIgnore]
@@ -24,10 +16,5 @@ namespace Releaser.Core.Events
 		{
 			get { return GetType().FullName; }
 		}
-
-		/// <summary>
-		/// Gets creation time of event.
-		/// </summary>
-		public DateTime CreationTime { get; private set; }
 	}
 }

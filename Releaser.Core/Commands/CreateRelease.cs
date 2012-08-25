@@ -15,12 +15,12 @@ namespace Releaser.Core.Commands
 		/// <summary>
 		/// Gets or sets project ID.
 		/// </summary>
-		public Guid ProjectId { get; set; }
+		public string ProjectId { get; set; }
 
 		/// <summary>
 		/// Gets or sets user ID.
 		/// </summary>
-		public Guid UserId { get; set; }
+		public string UserId { get; set; }
 
 		/// <summary>
 		/// Gets or sets release comment.

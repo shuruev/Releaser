@@ -38,8 +38,7 @@ namespace Releaser.Core.EventStore
 						var sc = new StoredCommand
 						{
 							Type = @event.GetType().FullName,
-							Json = JsonConvert.SerializeObject(@event),
-							StoreTime = DateTime.UtcNow
+							Json = JsonConvert.SerializeObject(@event)
 						};
 
 						writer.Write(JsonConvert.SerializeObject(sc));

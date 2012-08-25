@@ -22,16 +22,12 @@ namespace Releaser.Core.Entities
 			StorageType = storageType;
 			ProjectType = projectType;
 
-			Id = Guid.NewGuid();
+			// TODO: maybe change to project name?
+			Id = Guid.NewGuid().ToString("N");
 			CreationDate = DateTime.UtcNow;
 
 			Apply(new ProjectCreated(this));
 		}
-
-		/// <summary>
-		/// Gets entity identifier.
-		/// </summary>
-		public Guid Id { get; private set; }
 
 		/// <summary>
 		/// Gets project name.

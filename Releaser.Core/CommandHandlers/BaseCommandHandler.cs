@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Releaser.Core.Commands;
+using Releaser.Core.EntityStore;
 using Releaser.Core.Events;
 using Releaser.Core.Exceptions;
 
@@ -12,6 +13,16 @@ namespace Releaser.Core.CommandHandlers
 		: ICommandHandler
 		where T : class
 	{
+		protected readonly IEntityStore m_store;
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		protected BaseCommandHandler(IEntityStore store)
+		{
+			m_store = store;
+		}
+
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>

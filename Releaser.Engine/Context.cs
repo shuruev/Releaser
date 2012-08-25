@@ -1,6 +1,7 @@
 ﻿using Releaser.Core;
 using Releaser.Core.CommandHandlers;
 using Releaser.Core.Denormalizer;
+using Releaser.Core.EntityStore;
 using Releaser.Core.EventStore;
 using Releaser.Core.Views;
 
@@ -14,8 +15,9 @@ namespace Releaser.Engine
 		static Context()
 		{
 			Engine = new CommandEngine(
-				new CommandHandlerFactory(),
-				new FileEventStore("EventStore.dat"),
+				new CommandHandlerFactory(
+					new FileEntityStore(@"C:\Temp\ReleaserData")),
+				new FileEventStore(@"C:\Temp\ReleaserData\EventStore.dat"),
 				new Denormalizer(
 					new ViewFactory()));
 		}

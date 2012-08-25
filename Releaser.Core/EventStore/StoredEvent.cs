@@ -13,11 +13,6 @@ namespace Releaser.Core.EventStore
 		public string Type { get; set; }
 
 		/// <summary>
-		/// Gets or sets time when event was stored.
-		/// </summary>
-		public DateTime StoreTime { get; set; }
-
-		/// <summary>
 		/// Gets or sets Json presenatatin of event.
 		/// </summary>
 		public string Json { get; set; }

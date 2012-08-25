@@ -1,5 +1,6 @@
 ﻿using System;
 using Releaser.Core.Commands;
+using Releaser.Core.Utils;
 
 namespace Releaser.Core.Exceptions
 {
@@ -12,7 +13,7 @@ namespace Releaser.Core.Exceptions
 		/// Initializes a new instance.
 		/// </summary>
 		public CommandNotSupportedException(BaseCommand command)
-			: base(string.Format("Command {0} is not supported.", command.Name))
+			: base("Command {0} is not supported.".F(command.Name))
 		{
 		}
 	}

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
+using Releaser.Core.EntityStore;
 using Releaser.Core.Events;
 
 namespace Releaser.Core.CommandHandlers
@@ -11,12 +13,19 @@ namespace Releaser.Core.CommandHandlers
 	public class CreateReleaseHandler : BaseCommandHandler<CreateRelease>
 	{
 		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		public CreateReleaseHandler(IEntityStore store) : base(store)
+		{
+		}
+
+		/// <summary>
 		/// Executes specified command.
 		/// </summary>
 		protected override List<BaseEvent> ExecuteInternal(CreateRelease command)
 		{
 			// TODO: !!!: Fill unique code.
-			var code = string.Empty;
+			var code = Guid.NewGuid().ToString("N");
 			var release = new Release(
 				code,
 				command.VersionCode,
@@ -24,6 +33,8 @@ namespace Releaser.Core.CommandHandlers
 				command.UserId,
 				command.Comment
 				);
+
+			m_store.Write(release);
 
 			return release.GetChanges();
 		}

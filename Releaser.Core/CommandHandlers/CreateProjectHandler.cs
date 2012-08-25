@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
+using Releaser.Core.EntityStore;
 using Releaser.Core.Events;
 
 namespace Releaser.Core.CommandHandlers
@@ -11,6 +12,13 @@ namespace Releaser.Core.CommandHandlers
 	/// </summary>
 	public class CreateProjectHandler : BaseCommandHandler<CreateProject>
 	{
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		public CreateProjectHandler(IEntityStore store) : base(store)
+		{
+		}
+
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
@@ -22,7 +30,8 @@ namespace Releaser.Core.CommandHandlers
 				command.ProjectStorageType,
 				command.ProjectType);
 
-			// What about saving the project to a store?
+			m_store.Write(project);
+
 			return project.GetChanges();
 		}
 	}

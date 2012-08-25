@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Releaser.Core.Events;
 
 namespace Releaser.Core.Entities
@@ -9,6 +10,11 @@ namespace Releaser.Core.Entities
 	public abstract class AggregateRoot
 	{
 		private readonly List<BaseEvent> m_changes = new List<BaseEvent>();
+
+		/// <summary>
+		/// Gets aggregate root ID.
+		/// </summary>
+		public string Id { get; protected set; }
 
 		/// <summary>
 		/// Returns all changes with entity.

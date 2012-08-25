@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Releaser.Core.Commands;
+using Releaser.Core.EntityStore;
 
 namespace Releaser.Core.CommandHandlers
 {
@@ -15,15 +16,15 @@ namespace Releaser.Core.CommandHandlers
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public CommandHandlerFactory()
+		public CommandHandlerFactory(IEntityStore store)
 		{
-			RegisterAll();
+			RegisterAll(store);
 		}
 
 		/// <summary>
 		/// Registers all handlers from all assemblies.
 		/// </summary>
-		private void RegisterAll()
+		private void RegisterAll(IEntityStore store)
 		{
 			var commandType = typeof(BaseCommand);
 			var commandTypes = AppDomain.CurrentDomain
@@ -42,7 +43,9 @@ namespace Releaser.Core.CommandHandlers
 			foreach (Type type in commandTypes)
 			{
 				var command = (BaseCommand)Activator.CreateInstance(type);
-				m_handlers[command.Name] = (ICommandHandler)Activator.CreateInstance(handlerTypes[type]);
+				m_handlers[command.Name] = (ICommandHandler)Activator.CreateInstance(
+					handlerTypes[type],
+					store);
 			}
 		}
 
