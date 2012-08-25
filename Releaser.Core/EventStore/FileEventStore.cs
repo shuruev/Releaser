@@ -58,8 +58,8 @@ namespace Releaser.Core.EventStore
 				using (var fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read))
 				using (var reader = new BinaryReader(fs, Encoding.UTF8))
 				{
-					int pos = 0;
-					int length = (int)reader.BaseStream.Length;
+					var pos = 0;
+					var length = (int)reader.BaseStream.Length;
 
 					while (pos < length)
 					{

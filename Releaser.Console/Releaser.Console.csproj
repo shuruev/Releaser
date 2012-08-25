@@ -8,7 +8,7 @@
     <ProjectGuid>{FBCD2AE3-00AD-47CD-9616-B7A308A70DAA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Releaser.Console</RootNamespace>
+    <RootNamespace>ReleaserConsole</RootNamespace>
     <AssemblyName>Releaser.Console</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>

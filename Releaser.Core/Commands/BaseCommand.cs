@@ -1,7 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-
-namespace Releaser.Core.Commands
+﻿namespace Releaser.Core.Commands
 {
 	/// <summary>
 	/// Base class for commands.

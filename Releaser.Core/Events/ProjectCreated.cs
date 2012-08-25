@@ -1,5 +1,4 @@
-﻿using System;
-using Releaser.Core.Entities;
+﻿using Releaser.Core.Entities;
 
 namespace Releaser.Core.Events
 {

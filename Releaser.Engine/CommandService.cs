@@ -1,5 +1,4 @@
 using Releaser.Core;
-using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
 using Releaser.Core.Dto;
 using ServiceStack.ServiceInterface;
@@ -27,7 +26,7 @@ namespace Releaser.Engine
 		/// </summary>
 		public override object OnPost(CommandDto requestCommand)
 		{
-			BaseCommand command = requestCommand.Json.FromJson<BaseCommand>();
+			var command = requestCommand.Json.FromJson<BaseCommand>();
 			m_engine.ExecuteCommand(command);
 			return null;
 		}

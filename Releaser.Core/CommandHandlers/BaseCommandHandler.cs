@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
 using Releaser.Core.Events;
 using Releaser.Core.Exceptions;
 
-namespace Releaser.Core.Handlers
+namespace Releaser.Core.CommandHandlers
 {
 	/// <summary>
 	/// Base class for command handlers.
@@ -16,7 +15,7 @@ namespace Releaser.Core.Handlers
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		public IEnumerable<BaseEvent> Execute(BaseCommand command)
+		public List<BaseEvent> Execute(BaseCommand command)
 		{
 			if (!(command is T))
 				throw new CommandNotSupportedException(command);
@@ -27,6 +26,6 @@ namespace Releaser.Core.Handlers
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		protected abstract IEnumerable<BaseEvent> ExecuteInternal(T command);
+		protected abstract List<BaseEvent> ExecuteInternal(T command);
 	}
 }

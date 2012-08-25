@@ -2,7 +2,6 @@
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
 using Releaser.Core.Events;
-using Releaser.Core.Handlers;
 
 namespace Releaser.Core.CommandHandlers
 {
@@ -14,9 +13,9 @@ namespace Releaser.Core.CommandHandlers
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		protected override IEnumerable<BaseEvent> ExecuteInternal(CreateProjectCommand command)
+		protected override List<BaseEvent> ExecuteInternal(CreateProjectCommand command)
 		{
-			Project project = new Project(
+			var project = new Project(
 				command.ProjectName,
 				command.ProjectPath,
 				command.ProjectStorageType,

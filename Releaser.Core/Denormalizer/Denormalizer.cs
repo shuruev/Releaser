@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Releaser.Core.Commands;
 using Releaser.Core.Events;
 using Releaser.Core.Views;
 

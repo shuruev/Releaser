@@ -12,7 +12,7 @@ namespace Releaser.Migrations
 	{
 		public static void Main()
 		{
-			EngineClient client = new EngineClient("http://localhost:5557");
+			var client = new EngineClient("http://localhost:5557");
 
 			LoadProjects(client);
 
@@ -25,12 +25,12 @@ namespace Releaser.Migrations
 		{
 			Console.WriteLine("Loading projects...");
 
-			Stopwatch sw = new Stopwatch();
+			var sw = new Stopwatch();
 			sw.Start();
 
 			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
 
-			XElement xml = XElement.Parse(dataFile);
+			var xml = XElement.Parse(dataFile);
 
 			var projectNodes = xml.Elements("Project").ToList();
 			foreach (XElement projectNode in projectNodes)

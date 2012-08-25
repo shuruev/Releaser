@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Releaser.Core.Commands;
-using Releaser.Core.Denormalizer;
 
 namespace Releaser.Core.CommandHandlers
 {
@@ -42,7 +41,7 @@ namespace Releaser.Core.CommandHandlers
 
 			foreach (Type type in commandTypes)
 			{
-				BaseCommand command = (BaseCommand)Activator.CreateInstance(type);
+				var command = (BaseCommand)Activator.CreateInstance(type);
 				m_handlers[command.Name] = (ICommandHandler)Activator.CreateInstance(handlerTypes[type]);
 			}
 		}

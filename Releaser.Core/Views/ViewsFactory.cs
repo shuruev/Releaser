@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Releaser.Core.Commands;
 using Releaser.Core.Events;
 
 namespace Releaser.Core.Views
@@ -26,7 +25,7 @@ namespace Releaser.Core.Views
 
 			foreach (Type viewType in viewTypes)
 			{
-				IView view = (IView)Activator.CreateInstance(viewType);
+				var view = (IView)Activator.CreateInstance(viewType);
 				foreach (string command in view.SupportedEvents)
 				{
 					if (!m_views.ContainsKey(command))

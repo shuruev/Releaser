@@ -7,7 +7,7 @@ namespace ReleaserConsole
 	{
 		private static void Main()
 		{
-			Stopwatch sw = new Stopwatch();
+			var sw = new Stopwatch();
 			sw.Start();
 
 			sw.Stop();

@@ -12,6 +12,6 @@ namespace Releaser.Core.CommandHandlers
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		IEnumerable<BaseEvent> Execute(BaseCommand command);
+		List<BaseEvent> Execute(BaseCommand command);
 	}
 }
