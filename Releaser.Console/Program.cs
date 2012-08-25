@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using Autofac;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 using Releaser.Core.Client;
 using Releaser.Core.Commands;
-using Releaser.Core.CommandStore;
-using Releaser.Core.Entities;
-using Releaser.Core.Ioc;
 
 namespace ReleaserConsole
 {
@@ -13,7 +12,17 @@ namespace ReleaserConsole
 	{
 		private static void Main()
 		{
-			/*9FileCommandStore store = new FileCommandStore(@"c:\!Data\Dropbox\Projects\Releaser\Releaser.Engine\bin\Debug\commands.bin");
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
+
+
+
+			sw.Stop();
+			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);
+			Console.ReadKey();
+		}
+
+		/*9FileCommandStore store = new FileCommandStore(@"c:\!Data\Dropbox\Projects\Releaser\Releaser.Engine\bin\Debug\commands.bin");
 			foreach (BaseCommand cmd in store.ReadAllCommands())
 			{
 				Console.WriteLine(cmd.Name);
@@ -32,7 +41,7 @@ namespace ReleaserConsole
 			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);
 			Console.ReadKey();*/
 
-			Stopwatch sw = new Stopwatch();
+			/*Stopwatch sw = new Stopwatch();
 			sw.Start();
 
 			for (int i = 0; i < 10000; i++)
@@ -49,7 +58,7 @@ namespace ReleaserConsole
 
 			sw.Stop();
 			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);
-			Console.ReadKey();
+			Console.ReadKey();*/
 
 			/*sw.Stop();
 			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);
@@ -66,6 +75,5 @@ namespace ReleaserConsole
 			command.Project.DisplayName = "New project";
 
 			engine.ExecuteCommand(command);*/
-		}
 	}
 }

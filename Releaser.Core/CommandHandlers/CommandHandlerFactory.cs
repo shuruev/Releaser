@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Releaser.Core.Commands;
-using Releaser.Core.CommandStore;
 using Releaser.Core.Denormalizer;
 
 namespace Releaser.Core.CommandHandlers

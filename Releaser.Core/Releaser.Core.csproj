@@ -94,7 +94,7 @@
     <Compile Include="CommandHandlers\BaseCommandHandler.cs" />
     <Compile Include="CommandHandlers\CommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
-    <Compile Include="CommandHandlers\ProjectCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreateProjectCommandHandler.cs" />
     <Compile Include="CommandEngine.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="EventStore\FileEventStore.cs" />

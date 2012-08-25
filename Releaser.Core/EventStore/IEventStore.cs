@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Releaser.Core.Events;
 
-namespace Releaser.Core.CommandStore
+namespace Releaser.Core.EventStore
 {
 	/// <summary>
 	/// Interface for storing events.

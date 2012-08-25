@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Releaser.Core.CommandStore
+namespace Releaser.Core.EventStore
 {
 	/// <summary>
 	/// Entity for storing events.

@@ -10,10 +10,12 @@ namespace Releaser.Core.Views
 {
 	/// <summary>
 	/// View with projects.
+	/// TODO: Make it concurrent.
 	/// </summary>
 	public class ProjectsView : IView
 	{
-		private readonly ConcurrentDictionary<string, Project> m_projects = new ConcurrentDictionary<string, Project>();
+		private readonly Dictionary<Guid, Project> m_projects = new Dictionary<Guid, Project>();
+		//private readonly ConcurrentDictionary<string, List<Release>> m_releases = new ConcurrentDictionary<string, List<Release>>();
 
 		/// <summary>
 		/// Gets list of command classes which change view.
@@ -46,6 +48,8 @@ namespace Releaser.Core.Views
 
 		private void ApplyCreateProject(ProjectCreated @event)
 		{
+			var project = @event.Project;
+			m_projects.Add(project.Id, project);
 		}
 	}
 }

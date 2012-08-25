@@ -1,4 +1,5 @@
 ﻿using System;
+using Releaser.Core.Events;
 
 namespace Releaser.Core.Entities
 {
@@ -8,23 +9,47 @@ namespace Releaser.Core.Entities
 	public class Project : AggregateRoot
 	{
 		/// <summary>
-		/// Gets or sets entity identifier.
+		/// Initializes a new instance.
 		/// </summary>
-		public Guid Id { get; set; }
+		public Project(
+			string name,
+			string path,
+			string storageType,
+			string projectType)
+		{
+			Name = name;
+			Path = path;
+			StorageType = storageType;
+			ProjectType = projectType;
+
+			Id = Guid.NewGuid();
+
+			Apply(new ProjectCreated(this));
+		}
 
 		/// <summary>
-		/// Gets or sets project name.
+		/// Gets entity identifier.
 		/// </summary>
-		public string Name { get; set; }
+		public Guid Id { get; private set; }
 
 		/// <summary>
-		/// Gets or sets project display name.
+		/// Gets project name.
 		/// </summary>
-		public string DisplayName { get; set; }
+		public string Name { get; private set; }
 
 		/// <summary>
-		/// Gets or sets path to project version.
+		/// Gets path to project version.
 		/// </summary>
-		public string Path { get; set; }
+		public string Path { get; private set; }
+
+		/// <summary>
+		/// Gets type of storage.
+		/// </summary>
+		public string StorageType { get; private set; }
+
+		/// <summary>
+		/// Gets type of project.
+		/// </summary>
+		public string ProjectType { get; private set; }
 	}
 }

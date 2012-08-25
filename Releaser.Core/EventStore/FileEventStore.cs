@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using Releaser.Core.Events;
 using ServiceStack.Text;
 using JsonSerializer = ServiceStack.Text.JsonSerializer;
 
-namespace Releaser.Core.CommandStore
+namespace Releaser.Core.EventStore
 {
 	/// <summary>
 	/// Stores data to append-only file.
@@ -31,9 +32,10 @@ namespace Releaser.Core.CommandStore
 		{
 			lock (m_sync)
 			{
-				using (var writer = new FileStream(m_filePath, FileMode.Append, FileAccess.Write))
+				using (var fs = new FileStream(m_filePath, FileMode.Append, FileAccess.Write))
+				using (var writer = new BinaryWriter(fs, Encoding.UTF8))
 				{
-					foreach (BaseEvent @event in events)
+					foreach (var @event in events)
 					{
 						var sc = new StoredCommand
 						{
@@ -42,11 +44,7 @@ namespace Releaser.Core.CommandStore
 							StoreTime = DateTime.UtcNow
 						};
 
-						byte[] data = JsonConvert.SerializeObject(sc).ToUtf8Bytes();
-						byte[] size = BitConverter.GetBytes(data.Length);
-
-						writer.Write(size, 0, size.Length);
-						writer.Write(data, 0, data.Length);
+						writer.Write(JsonConvert.SerializeObject(sc));
 					}
 				}
 			}
@@ -59,17 +57,19 @@ namespace Releaser.Core.CommandStore
 		{
 			lock (m_sync)
 			{
-				using (var reader = new FileStream(m_filePath, FileMode.Open, FileAccess.Read))
+				using (var fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read))
+				using (var reader = new BinaryReader(fs, Encoding.UTF8))
 				{
-					byte[] buffer = new byte[4];
-					while (reader.Read(buffer, 0, 4) > 0)
+					int pos = 0;
+					int length = (int) reader.BaseStream.Length;
+					while (pos < length)
 					{
-						int size = BitConverter.ToInt32(buffer, 0);
-						byte[] data = reader.ReadExactly(size);
-						string json = data.FromUtf8Bytes();
+						var json = reader.ReadString();
 						var sc = JsonSerializer.DeserializeFromString<StoredCommand>(json);
 						var type = AssemblyUtils.FindType(sc.Type);
 						yield return (BaseEvent)JsonSerializer.DeserializeFromString(sc.Json, type);
+
+						pos += sizeof (int);
 					}
 				}
 			}

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
-using Releaser.Core.CommandStore;
 using Releaser.Core.Denormalizer;
 using Releaser.Core.Events;
+using Releaser.Core.EventStore;
 using Releaser.Core.Exceptions;
 
 namespace Releaser.Core

@@ -1,8 +1,8 @@
 ﻿using Releaser.Core;
 using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
-using Releaser.Core.CommandStore;
 using Releaser.Core.Denormalizer;
+using Releaser.Core.EventStore;
 using Releaser.Core.Views;
 
 namespace Releaser.Engine
