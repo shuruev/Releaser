@@ -1,7 +1,10 @@
-﻿using Releaser.Core.CommandHandlers;
+﻿using System;
+using System.Diagnostics;
+using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
 using Releaser.Core.Denormalizer;
 using Releaser.Core.EventStore;
+using Releaser.Core.Events;
 using Releaser.Core.Exceptions;
 
 namespace Releaser.Core
@@ -26,6 +29,8 @@ namespace Releaser.Core
 			m_factory = factory;
 			m_store = store;
 			m_denormalizer = denormalizer;
+
+			RebuildViews();
 		}
 
 		/// <summary>
@@ -41,5 +46,24 @@ namespace Releaser.Core
 			m_store.SaveEvents(events);
 			m_denormalizer.Denormalize(events);
 		}
+
+		/// <summary>
+		/// Fills views on start server.
+		/// </summary>
+		private void RebuildViews()
+		{
+			Console.WriteLine("Rebuilding views...");
+
+			var sw = new Stopwatch();
+			sw.Start();
+
+			var events = m_store.ReadAllEvents();
+			m_denormalizer.Denormalize(events);
+
+			sw.Stop();
+
+			Console.WriteLine("Views were rebuilt ({0}ms).", sw.ElapsedMilliseconds);
+		}
+
 	}
 }

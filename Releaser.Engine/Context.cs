@@ -23,6 +23,14 @@ namespace Releaser.Engine
 		}
 
 		/// <summary>
+		/// Initializes all context variables.
+		/// </summary>
+		public static void Initialize()
+		{
+			
+		}
+
+		/// <summary>
 		/// Gets static command engine.
 		/// </summary>
 		public static CommandEngine Engine { get; private set; }

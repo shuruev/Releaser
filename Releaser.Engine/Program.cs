@@ -6,6 +6,8 @@ namespace Releaser.Engine
 	{
 		private static void Main(string[] args)
 		{
+			Context.Initialize();
+			
 			if (Environment.UserInteractive)
 			{
 				var listeningOn = args.Length == 0 ? "http://localhost:5557/" : args[0];

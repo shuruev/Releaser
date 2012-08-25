@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Xml.Linq;
 using Releaser.Core.Client;
 using Releaser.Core.Commands;
@@ -12,6 +13,8 @@ namespace Releaser.Migrations
 	{
 		public static void Main()
 		{
+			// For starting after engine.
+			Thread.Sleep(2000);
 			// TODO: Rework it. Write to event store all events.
 
 			var client = new EngineClient("http://localhost:5557");
@@ -66,7 +69,7 @@ namespace Releaser.Migrations
 
 			var xml = XElement.Parse(dataFile);
 
-			var releaseNodes = xml.Elements("ReleaseId").ToList();
+			var releaseNodes = xml.Elements("Release").ToList();
 			foreach (XElement releaseNode in releaseNodes)
 			{
 				var command = new CreateRelease();

@@ -29,7 +29,7 @@ namespace Releaser.Core.CommandHandlers
 			if (release == null)
 			{
 				throw new InvalidOperationException(
-					"ReleaseId with ID = '{0}' does not exist in store.".F(command.ReleaseId));
+					"Release with ID = '{0}' does not exist in store.".F(command.ReleaseId));
 			}
 
 			release.ChangeComment(command.Comment);

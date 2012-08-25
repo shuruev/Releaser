@@ -57,17 +57,15 @@ namespace Releaser.Core.EventStore
 				using (var fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read))
 				using (var reader = new BinaryReader(fs, Encoding.UTF8))
 				{
-					var pos = 0;
-					var length = (int)reader.BaseStream.Length;
+					var length = (int) reader.BaseStream.Length;
 
-					while (pos < length)
+					while (fs.Position < length)
 					{
 						var json = reader.ReadString();
 						var sc = JsonConvert.DeserializeObject<StoredCommand>(json);
 						var type = Type.GetType(sc.Type);
-						yield return (BaseEvent) JsonConvert.DeserializeObject(sc.Json, type);
-
-						pos += sizeof(int);
+						var @event = (BaseEvent) JsonConvert.DeserializeObject(sc.Json, type);
+						yield return @event;
 					}
 				}
 			}
