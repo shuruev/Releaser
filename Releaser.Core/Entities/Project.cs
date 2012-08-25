@@ -4,7 +4,7 @@ using Releaser.Core.Events;
 namespace Releaser.Core.Entities
 {
 	/// <summary>
-	/// Entity project.
+	/// Represents project.
 	/// </summary>
 	public class Project : AggregateRoot
 	{
@@ -23,6 +23,7 @@ namespace Releaser.Core.Entities
 			ProjectType = projectType;
 
 			Id = Guid.NewGuid();
+			CreationDate = DateTime.UtcNow;
 
 			Apply(new ProjectCreated(this));
 		}
@@ -51,5 +52,10 @@ namespace Releaser.Core.Entities
 		/// Gets type of project.
 		/// </summary>
 		public string ProjectType { get; private set; }
+
+		/// <summary>
+		/// Gets project creation date.
+		/// </summary>
+		public DateTime CreationDate { get; private set; }
 	}
 }

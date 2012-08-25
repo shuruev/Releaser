@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
 using Releaser.Core.Events;
@@ -6,14 +7,14 @@ using Releaser.Core.Events;
 namespace Releaser.Core.CommandHandlers
 {
 	/// <summary>
-	/// Handles all commands with projects.
+	/// Handles create project command.
 	/// </summary>
-	public class CreateProjectCommandHandler : BaseCommandHandler<CreateProjectCommand>
+	public class CreateProjectHandler : BaseCommandHandler<CreateProject>
 	{
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		protected override List<BaseEvent> ExecuteInternal(CreateProjectCommand command)
+		protected override List<BaseEvent> ExecuteInternal(CreateProject command)
 		{
 			var project = new Project(
 				command.ProjectName,

@@ -41,7 +41,7 @@ namespace ReleaserConsole
 			{
 				EngineClient client = new EngineClient("http://localhost:5557");
 
-				var command = new CreateProjectCommand();
+				var command = new CreateProject();
 				command.ProjectName = "NewProject " + i;
 				command.ProjectPath = "PublicationStorage";
 				command.ProjectDisplayName = "New project";
@@ -61,7 +61,7 @@ namespace ReleaserConsole
 
 			CommandEngine engine = new CommandEngine(resolver);
 
-			var command = new CreateProjectCommand();
+			var command = new CreateProject();
 			command.Project = new Project();
 			command.Project.Name = "NewProject";
 			command.Project.Path = "PublicationStorage";

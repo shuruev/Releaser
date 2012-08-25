@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using Releaser.Core.Commands;
+﻿using Releaser.Core.Commands;
 using Releaser.Core.Dto;
 using ServiceStack.ServiceClient.Web;
+using ServiceStack.Text;
 
 namespace Releaser.Core.Client
 {
@@ -25,10 +25,10 @@ namespace Releaser.Core.Client
 		/// </summary>
 		public void SendCommand(BaseCommand command)
 		{
-			JsonServiceClient client = new JsonServiceClient(m_url);
+			var client = new JsonServiceClient(m_url);
 			client.Send<object>(new CommandDto
 			{
-				Json = JsonConvert.SerializeObject(command)
+				Json = command.ToJson()
 			});
 		}
 	}

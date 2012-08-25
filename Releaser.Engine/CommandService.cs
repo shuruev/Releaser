@@ -1,3 +1,4 @@
+using System;
 using Releaser.Core;
 using Releaser.Core.Commands;
 using Releaser.Core.Dto;
@@ -26,9 +27,19 @@ namespace Releaser.Engine
 		/// </summary>
 		public override object OnPost(CommandDto requestCommand)
 		{
-			var command = requestCommand.Json.FromJson<BaseCommand>();
-			m_engine.ExecuteCommand(command);
-			return null;
+			try
+			{
+				var command = requestCommand.Json.FromJson<BaseCommand>();
+				m_engine.ExecuteCommand(command);
+				return null;
+			}
+			catch(Exception e)
+			{
+				Console.ForegroundColor = ConsoleColor.Yellow;
+				Console.WriteLine(e.ToString());
+				Console.ResetColor();
+				throw;
+			}
 		}
 	}
 }

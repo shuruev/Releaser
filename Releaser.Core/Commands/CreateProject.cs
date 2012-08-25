@@ -3,7 +3,7 @@ namespace Releaser.Core.Commands
 	/// <summary>
 	/// Command for creating project.
 	/// </summary>
-	public class CreateProjectCommand : BaseCommand
+	public class CreateProject : BaseCommand
 	{
 		/// <summary>
 		/// Gets or sets project name.

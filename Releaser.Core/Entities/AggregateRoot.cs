@@ -6,7 +6,7 @@ namespace Releaser.Core.Entities
 	/// <summary>
 	/// Base class for aggregate root entities.
 	/// </summary>
-	public class AggregateRoot
+	public abstract class AggregateRoot
 	{
 		private readonly List<BaseEvent> m_changes = new List<BaseEvent>();
 
@@ -18,6 +18,9 @@ namespace Releaser.Core.Entities
 			return new List<BaseEvent>(m_changes);
 		}
 
+		/// <summary>
+		/// Adds event to changes.
+		/// </summary>
 		protected void Apply(BaseEvent @event)
 		{
 			m_changes.Add(@event);

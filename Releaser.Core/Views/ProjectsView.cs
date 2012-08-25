@@ -14,8 +14,7 @@ namespace Releaser.Core.Views
 	public class ProjectsView : IView
 	{
 		private readonly Dictionary<Guid, Project> m_projects = new Dictionary<Guid, Project>();
-
-		// private readonly ConcurrentDictionary<string, List<Release>> m_releases = new ConcurrentDictionary<string, List<Release>>();
+		private readonly Dictionary<Guid, List<Release>> m_releases = new Dictionary<Guid, List<Release>>();
 
 		/// <summary>
 		/// Gets list of command classes which change view.
@@ -27,7 +26,8 @@ namespace Releaser.Core.Views
 			{
 				return new List<string>
 				{
-					typeof(ProjectCreated).FullName
+					typeof(ProjectCreated).FullName,
+					typeof(ReleaseCreated).FullName,
 				};
 			}
 		}
@@ -43,6 +43,12 @@ namespace Releaser.Core.Views
 				return;
 			}
 
+			if (@event is ReleaseCreated)
+			{
+				ApplyCreateProject(@event as ReleaseCreated);
+				return;
+			}
+
 			throw new EventNotSupportedException(@event);
 		}
 
@@ -50,6 +56,17 @@ namespace Releaser.Core.Views
 		{
 			var project = @event.Project;
 			m_projects.Add(project.Id, project);
+			m_releases.Add(project.Id, new List<Release>());
+		}
+
+		private void ApplyCreateProject(ReleaseCreated @event)
+		{
+			var release = @event.Release;
+
+			if (!m_releases.ContainsKey(release.ProjectId))
+				m_releases[release.ProjectId] = new List<Release>();
+
+			m_releases[release.ProjectId].Add(release);
 		}
 	}
 }

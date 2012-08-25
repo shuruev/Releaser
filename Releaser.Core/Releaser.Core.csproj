@@ -77,6 +77,9 @@
     <Reference Include="ServiceStack.Interfaces">
       <HintPath>..\References\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\References\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -90,10 +93,14 @@
     <Compile Include="Client\EngineClient.cs" />
     <Compile Include="CommandHandlers\BaseCommandHandler.cs" />
     <Compile Include="CommandHandlers\CommandHandlerFactory.cs" />
+    <Compile Include="CommandHandlers\CreateReleaseHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
-    <Compile Include="CommandHandlers\CreateProjectCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreateProjectHandler.cs" />
     <Compile Include="CommandEngine.cs" />
+    <Compile Include="Commands\CreateRelease.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
+    <Compile Include="Entities\Release.cs" />
+    <Compile Include="Events\ReleaseCreated.cs" />
     <Compile Include="EventStore\FileEventStore.cs" />
     <Compile Include="EventStore\StoredEvent.cs" />
     <Compile Include="Denormalizer\Denormalizer.cs" />
@@ -107,7 +114,7 @@
     <Compile Include="Exceptions\EventNotSupportedException.cs" />
     <Compile Include="Ioc\AutofacResolver.cs" />
     <Compile Include="Ioc\IResolver.cs" />
-    <Compile Include="Commands\CreateProjectCommand.cs" />
+    <Compile Include="Commands\CreateProject.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IView.cs" />
