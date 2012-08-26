@@ -95,6 +95,7 @@
     <Compile Include="CommandHandlers\ChangeReleaseCommentHandler.cs" />
     <Compile Include="CommandHandlers\CommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\CreateConfigurationHandler.cs" />
+    <Compile Include="CommandHandlers\CreateDeploymentHandler.cs" />
     <Compile Include="CommandHandlers\CreateReleaseHandler.cs" />
     <Compile Include="CommandHandlers\CreateUserHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
@@ -102,10 +103,13 @@
     <Compile Include="CommandEngine.cs" />
     <Compile Include="Commands\ChangeReleaseComment.cs" />
     <Compile Include="Commands\CreateConfiguration.cs" />
+    <Compile Include="Commands\CreateDeployment.cs" />
     <Compile Include="Commands\CreateRelease.cs" />
     <Compile Include="Commands\CreateUser.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Entities\Configuration.cs" />
+    <Compile Include="Entities\Deployment.cs" />
+    <Compile Include="Events\DeploymentCreated.cs" />
     <Compile Include="Events\ConfigurationCreated.cs" />
     <Compile Include="Entities\Release.cs" />
     <Compile Include="Entities\User.cs" />

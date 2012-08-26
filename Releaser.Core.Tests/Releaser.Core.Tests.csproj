@@ -53,11 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\CreateConfigurationHandlerTests.cs" />
+    <Compile Include="CommandHandlers\CreateDeploymentHandlerTests.cs" />
     <Compile Include="CommandHandlers\CreateProjectHandlerTests.cs" />
     <Compile Include="CommandHandlers\CreateReleaseHandlerTests.cs" />
     <Compile Include="CommandHandlers\CommandHandlerFactoryTests.cs" />
     <Compile Include="CommandHandlers\CreateUserHandlerTests.cs" />
     <Compile Include="Entities\ConfigurationTests.cs" />
+    <Compile Include="Entities\DeploymentTests.cs" />
     <Compile Include="Entities\ProjectTests.cs" />
     <Compile Include="Entities\ReleaseTests.cs" />
     <Compile Include="Entities\UserTests.cs" />

@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Releaser.Core.Entities;
+using Releaser.Core.Events;
 
 namespace Releaser.Core.Tests.Entities
 {

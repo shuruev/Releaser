@@ -4,6 +4,7 @@ using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
 using Releaser.Core.Entities;
 using Releaser.Core.EntityStore;
+using Releaser.Core.Events;
 
 namespace Releaser.Core.Tests.CommandHandlers
 {

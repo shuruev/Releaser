@@ -1,7 +1,6 @@
-using System;
-using Releaser.Core.Events;
+using Releaser.Core.Entities;
 
-namespace Releaser.Core.Entities
+namespace Releaser.Core.Events
 {
 	/// <summary>
 	/// Event which raises after user creation.
