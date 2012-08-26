@@ -1,8 +1,9 @@
-﻿using System;
+﻿// ReSharper disable PossibleNullReferenceException
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Xml.Linq;
 using Releaser.Core.Entities;
 using Releaser.Core.EntityStore;
@@ -15,6 +16,9 @@ namespace Releaser.Migrations
 		private static FileEntityStore s_entityStore;
 		private static FileEventStore s_eventStore;
 
+		private readonly static Dictionary<string, string> s_releasesMap = new Dictionary<string, string>();
+		private readonly static Dictionary<string, string> s_configurationMap = new Dictionary<string, string>();
+
 		public static void Main()
 		{
 			s_entityStore = new FileEntityStore(@"C:\Temp\ReleaserData");
@@ -24,6 +28,7 @@ namespace Releaser.Migrations
 			LoadProjects();
 			LoadReleases();
 			LoadConfigurations();
+			LoadDeployments();
 
 			Console.WriteLine();
 			Console.WriteLine("Press any key to continue...");
@@ -117,8 +122,14 @@ namespace Releaser.Migrations
 					releaseNode.Element("UserUid").Value,
 					releaseNode.Element("ReleaseComment").Value);
 
+				release.ReleaseDate = DateTime.Parse(releaseNode.Element("ReleaseDate").Value);
+
 				s_entityStore.Write(release);
-				s_eventStore.SaveEvents(release.GetChanges());	
+				s_eventStore.SaveEvents(release.GetChanges());
+
+				s_releasesMap.Add(
+					releaseNode.Element("ReleaseUid").Value,
+					releaseNode.Element("ReleaseCode").Value);
 			}
 
 			sw.Stop();
@@ -144,6 +155,8 @@ namespace Releaser.Migrations
 			s_entityStore.Write(configuration);
 			s_eventStore.SaveEvents(configuration.GetChanges());
 
+			s_configurationMap.Add("56d8ea93-95af-4f54-8d81-5fbcf1768550", "C12");
+
 			configuration = new Configuration(
 				"LIVE (PHX2)",
 				"LIVE (PHX2) Configuration",
@@ -151,6 +164,8 @@ namespace Releaser.Migrations
 
 			s_entityStore.Write(configuration);
 			s_eventStore.SaveEvents(configuration.GetChanges());
+
+			s_configurationMap.Add("3a23c70a-b5dc-4883-a825-75bd2a639a46", "LIVE (PHX2)");
 
 			sw.Stop();
 
@@ -160,5 +175,39 @@ namespace Releaser.Migrations
 				sw.ElapsedMilliseconds);
 		}
 
+		private static void LoadDeployments()
+		{
+			Console.WriteLine("Loading deployments...");
+
+			var sw = new Stopwatch();
+			sw.Start();
+
+			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+
+			var xml = XElement.Parse(dataFile);
+
+			var deploymentNodes = xml.Elements("Deployment").ToList();
+			foreach (XElement deploymentNode in deploymentNodes)
+			{
+				var deployment = new Deployment(
+					s_releasesMap[deploymentNode.Element("ReleaseUid").Value],
+					s_configurationMap[deploymentNode.Element("ConfigurationUid").Value],
+					deploymentNode.Element("UserUid").Value);
+
+				deployment.Id = deploymentNode.Element("DeploymentUid").Value;
+				deployment.CreationDate = DateTime.Parse(deploymentNode.Element("DeploymentDate").Value);
+
+				s_entityStore.Write(deployment);
+				s_eventStore.SaveEvents(deployment.GetChanges());
+			}
+
+			sw.Stop();
+
+			Console.WriteLine(
+				"{0} deployments were loaded ({1}ms).",
+				deploymentNodes.Count,
+				sw.ElapsedMilliseconds);
+		}
 	}
 }
+// ReSharper restore PossibleNullReferenceException

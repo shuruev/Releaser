@@ -51,6 +51,6 @@ namespace Releaser.Core.Entities
 		/// <summary>
 		/// Gets or sets deployment creation date.
 		/// </summary>
-		protected DateTime CreationDate { get; set; }
+		public DateTime CreationDate { get; set; }
 	}
 }
