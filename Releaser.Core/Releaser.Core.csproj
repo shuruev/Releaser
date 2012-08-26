@@ -95,13 +95,17 @@
     <Compile Include="CommandHandlers\ChangeReleaseCommentHandler.cs" />
     <Compile Include="CommandHandlers\CommandHandlerFactory.cs" />
     <Compile Include="CommandHandlers\CreateReleaseHandler.cs" />
+    <Compile Include="CommandHandlers\CreateUserHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateProjectHandler.cs" />
     <Compile Include="CommandEngine.cs" />
     <Compile Include="Commands\ChangeReleaseComment.cs" />
     <Compile Include="Commands\CreateRelease.cs" />
+    <Compile Include="Commands\CreateUser.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Entities\Release.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Events\UserCreated.cs" />
     <Compile Include="Events\ReleaseCommentChanged.cs" />
     <Compile Include="EntityStore\FileEntityStore.cs" />
     <Compile Include="Events\ReleaseCreated.cs" />

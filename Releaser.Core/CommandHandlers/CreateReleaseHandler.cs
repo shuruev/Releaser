@@ -24,8 +24,7 @@ namespace Releaser.Core.CommandHandlers
 		/// </summary>
 		protected override List<BaseEvent> ExecuteInternal(CreateRelease command)
 		{
-			// TODO: !!!: Fill unique code.
-			var code = Guid.NewGuid().ToString("N");
+			var code = GetCode();
 			var release = new Release(
 				code,
 				command.VersionCode,
@@ -36,6 +35,17 @@ namespace Releaser.Core.CommandHandlers
 			m_store.Write(release);
 
 			return release.GetChanges();
+		}
+
+		private string GetCode()
+		{
+			while (true)
+			{
+				var code = Guid.NewGuid().ToString("N").ToUpper().Substring(0, 4);
+				var release = m_store.Read<Release>(code);
+				if (release == null)
+					return code;
+			}
 		}
 	}
 }

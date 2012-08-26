@@ -30,7 +30,7 @@ namespace Releaser.Core.Entities
 			ProjectType = projectType;
 
 			// TODO: maybe change to project name?
-			Id = Guid.NewGuid().ToString("N");
+			Id = Guid.NewGuid().ToString();
 			CreationDate = DateTime.UtcNow;
 
 			Apply(new ProjectCreated(this));

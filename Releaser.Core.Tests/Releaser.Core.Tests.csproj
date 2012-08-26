@@ -55,8 +55,10 @@
     <Compile Include="CommandHandlers\CreateProjectHandlerTests.cs" />
     <Compile Include="CommandHandlers\CreateReleaseHandlerTests.cs" />
     <Compile Include="CommandHandlers\CommandHandlerFactoryTests.cs" />
+    <Compile Include="CommandHandlers\CreateUserHandlerTests.cs" />
     <Compile Include="Entities\ProjectTests.cs" />
     <Compile Include="Entities\ReleaseTests.cs" />
+    <Compile Include="Entities\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ViewFactoryTests.cs" />
   </ItemGroup>
