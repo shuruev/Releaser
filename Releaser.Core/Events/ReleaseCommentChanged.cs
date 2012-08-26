@@ -19,12 +19,12 @@ namespace Releaser.Core.Events
 		}
 
 		/// <summary>
-		/// Gets release ID.
+		/// Gets or sets release ID.
 		/// </summary>
-		public string ReleaseId { get; private set; }
+		public string ReleaseId { get; set; }
 
 		/// <summary>
-		/// Gets new release comment.
+		/// Gets or sets new release comment.
 		/// </summary>
 		public string ReleaseComment { get; set; }
 	}

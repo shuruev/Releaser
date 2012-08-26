@@ -16,8 +16,8 @@ namespace Releaser.Core.Events
 		}
 
 		/// <summary>
-		/// Gets created release.
+		/// Gets or sets created release.
 		/// </summary>
-		public Release Release { get; private set; }
+		public Release Release { get; set; }
 	}
 }

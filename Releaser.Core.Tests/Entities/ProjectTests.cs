@@ -33,5 +33,26 @@ namespace Releaser.Core.Tests.Entities
 			Assert.AreEqual(storageType, @event.Project.StorageType);
 			Assert.AreEqual(projectType, @event.Project.ProjectType);
 		}
+
+		[TestMethod]
+		public void AddReleaser_Should_Generate_Event_Releaser_Added()
+		{
+			const string projectId = "project id";
+			const string userId = "user id";
+
+			var project = new Project();
+			project.Id = projectId;
+			project.AddReleaser(userId);
+
+			var events = project.GetChanges();
+
+			Assert.AreEqual(1, events.Count);
+			Assert.IsTrue(events[0] is ReleaserAdded);
+
+			var @event = (ReleaserAdded)events[0];
+
+			Assert.AreEqual(projectId, @event.ProjectId);
+			Assert.AreEqual(userId, @event.UserId);
+		}
 	}
 }

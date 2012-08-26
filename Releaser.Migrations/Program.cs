@@ -27,6 +27,7 @@ namespace Releaser.Migrations
 
 			LoadUsers();
 			LoadProjects();
+			LoadReleasers();
 			LoadReleases();
 			LoadConfigurations();
 			LoadDeployments();
@@ -104,6 +105,37 @@ namespace Releaser.Migrations
 				projectNodes.Count,
 				sw.ElapsedMilliseconds);
 		}
+
+		private static void LoadReleasers()
+		{
+			Console.WriteLine("Loading releasers...");
+
+			var sw = new Stopwatch();
+			sw.Start();
+
+			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+
+			var xml = XElement.Parse(dataFile);
+
+			var releasers = xml.Elements("Releaser").ToList();
+			foreach (XElement releaser in releasers)
+			{
+				var projectId = releaser.Element("ProjectUid").Value;
+				var project = s_entityStore.Read<Project>(projectId);
+				project.AddReleaser(s_userMap[releaser.Element("UserUid").Value]);
+
+				s_entityStore.Write(project);
+				s_eventStore.SaveEvents(project.GetChanges());
+			}
+
+			sw.Stop();
+
+			Console.WriteLine(
+				"{0} releasers were loaded ({1}ms).",
+				releasers.Count,
+				sw.ElapsedMilliseconds);
+		}
+
 
 		private static void LoadReleases()
 		{

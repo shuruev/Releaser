@@ -16,8 +16,8 @@ namespace Releaser.Core.Events
 		}
 
 		/// <summary>
-		/// Gets created deployment.
+		/// Gets or sets created deployment.
 		/// </summary>
-		public Deployment Deployment { get; private set; }
+		public Deployment Deployment { get; set; }
 	}
 }

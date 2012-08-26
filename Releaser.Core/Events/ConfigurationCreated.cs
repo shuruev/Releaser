@@ -18,6 +18,6 @@ namespace Releaser.Core.Events
 		/// <summary>
 		/// Gets or sets created configuration.
 		/// </summary>
-		public Configuration Configuration { get; private set; }
+		public Configuration Configuration { get; set; }
 	}
 }

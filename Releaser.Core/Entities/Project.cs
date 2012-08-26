@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Releaser.Core.Events;
 
 namespace Releaser.Core.Entities
@@ -13,6 +14,7 @@ namespace Releaser.Core.Entities
 		/// </summary>
 		public Project()
 		{
+			Releasers = new List<string>();
 		}
 
 		/// <summary>
@@ -32,6 +34,8 @@ namespace Releaser.Core.Entities
 			// TODO: maybe change to project name?
 			Id = Guid.NewGuid().ToString();
 			CreationDate = DateTime.UtcNow;
+
+			Releasers = new List<string>();
 
 			Apply(new ProjectCreated(this));
 		}
@@ -60,5 +64,20 @@ namespace Releaser.Core.Entities
 		/// Gets or sets project creation date.
 		/// </summary>
 		public DateTime CreationDate { get; set; }
+
+		/// <summary>
+		/// Gets or sets list of releasers.
+		/// </summary>
+		public List<string> Releasers { get; set; }
+
+		/// <summary>
+		/// Adds the specified user as releaser.
+		/// </summary>
+		public void AddReleaser(string userId)
+		{
+			Releasers.Add(userId);
+
+			Apply(new ReleaserAdded(Id, userId));
+		}
 	}
 }

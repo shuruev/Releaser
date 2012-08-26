@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\EngineClient.cs" />
+    <Compile Include="CommandHandlers\AddReleaserHandler.cs" />
     <Compile Include="CommandHandlers\BaseCommandHandler.cs" />
     <Compile Include="CommandHandlers\ChangeReleaseCommentHandler.cs" />
     <Compile Include="CommandHandlers\CommandHandlerFactory.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateProjectHandler.cs" />
     <Compile Include="CommandEngine.cs" />
+    <Compile Include="Commands\AddReleaser.cs" />
     <Compile Include="Commands\ChangeReleaseComment.cs" />
     <Compile Include="Commands\CreateConfiguration.cs" />
     <Compile Include="Commands\CreateDeployment.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Entities\Configuration.cs" />
     <Compile Include="Entities\Deployment.cs" />
+    <Compile Include="Events\ReleaserAdded.cs" />
     <Compile Include="Events\DeploymentCreated.cs" />
     <Compile Include="Events\ConfigurationCreated.cs" />
     <Compile Include="Entities\Release.cs" />

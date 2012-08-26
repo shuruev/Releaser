@@ -16,8 +16,8 @@ namespace Releaser.Core.Events
 		}
 
 		/// <summary>
-		/// Gets created user,
+		/// Gets or sets created user,
 		/// </summary>
-		public User User { get; private set; }
+		public User User { get; set; }
 	}
 }

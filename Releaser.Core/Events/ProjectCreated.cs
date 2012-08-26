@@ -16,8 +16,8 @@ namespace Releaser.Core.Events
 		}
 
 		/// <summary>
-		/// Gets created project.
+		/// Gets or sets created project.
 		/// </summary>
-		public Project Project { get; private set; }
+		public Project Project { get; set; }
 	}
 }
