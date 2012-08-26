@@ -23,6 +23,7 @@ namespace Releaser.Migrations
 			LoadUsers();
 			LoadProjects();
 			LoadReleases();
+			LoadConfigurations();
 
 			Console.WriteLine();
 			Console.WriteLine("Press any key to continue...");
@@ -127,5 +128,37 @@ namespace Releaser.Migrations
 				releaseNodes.Count,
 				sw.ElapsedMilliseconds);
 		}
+
+		private static void LoadConfigurations()
+		{
+			Console.WriteLine("Loading configurations...");
+
+			var sw = new Stopwatch();
+			sw.Start();
+
+			var configuration = new Configuration(
+				"C12",
+				"C12 Configuration",
+				"Configuration in C12 datacenter");
+
+			s_entityStore.Write(configuration);
+			s_eventStore.SaveEvents(configuration.GetChanges());
+
+			configuration = new Configuration(
+				"LIVE (PHX2)",
+				"LIVE (PHX2) Configuration",
+				"LIVE configuration in PHOENIX datacenter");
+
+			s_entityStore.Write(configuration);
+			s_eventStore.SaveEvents(configuration.GetChanges());
+
+			sw.Stop();
+
+			Console.WriteLine(
+				"{0} configurations were loaded ({1}ms).",
+				2,
+				sw.ElapsedMilliseconds);
+		}
+
 	}
 }
