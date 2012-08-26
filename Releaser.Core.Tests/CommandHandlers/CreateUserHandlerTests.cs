@@ -29,9 +29,9 @@ namespace Releaser.Core.Tests.CommandHandlers
 
 			store.Verify(s => s.Write(It.Is<User>(
 				u => u.Name == userName
-				     && u.Code == userCode
-				     && u.Login == userLogin)),
-			             Times.Once());
+					 && u.Code == userCode
+					 && u.Login == userLogin)),
+				Times.Once());
 
 			Assert.AreEqual(1, events.Count);
 			Assert.IsTrue(events[0] is UserCreated);
