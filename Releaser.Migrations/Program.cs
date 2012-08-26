@@ -4,30 +4,64 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
-using Releaser.Core.Client;
-using Releaser.Core.Commands;
+using Releaser.Core.Entities;
+using Releaser.Core.EntityStore;
+using Releaser.Core.EventStore;
 
 namespace Releaser.Migrations
 {
 	public class Program
 	{
+		private static FileEntityStore s_entityStore;
+		private static FileEventStore s_eventStore;
+
 		public static void Main()
 		{
-			// For starting after engine.
-			Thread.Sleep(2000);
-			// TODO: Rework it. Write to event store all events.
+			s_entityStore = new FileEntityStore(@"C:\Temp\ReleaserData");
+			s_eventStore = new FileEventStore(@"C:\Temp\ReleaserData\EventStore.dat");
 
-			var client = new EngineClient("http://localhost:5557");
-
-			LoadProjects(client);
-			LoadReleases(client);
+			LoadUsers();
+			LoadProjects();
+			LoadReleases();
 
 			Console.WriteLine();
 			Console.WriteLine("Press any key to continue...");
 			Console.ReadKey();
 		}
 
-		private static void LoadProjects(EngineClient client)
+		private static void LoadUsers()
+		{
+			Console.WriteLine("Loading users...");
+
+			var sw = new Stopwatch();
+			sw.Start();
+
+			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+
+			var xml = XElement.Parse(dataFile);
+
+			var userNodes = xml.Elements("User").ToList();
+			foreach (XElement userNode in userNodes)
+			{
+				var user = new User(
+					userNode.Element("UserLogin").Value,
+					userNode.Element("UserCode").Value,
+					userNode.Element("UserName").Value);
+				user.Id = userNode.Element("UserUid").Value;
+
+				s_entityStore.Write(user);
+				s_eventStore.SaveEvents(user.GetChanges());
+			}
+
+			sw.Stop();
+
+			Console.WriteLine(
+				"{0} users were loaded ({1}ms).",
+				userNodes.Count,
+				sw.ElapsedMilliseconds);
+		}
+
+		private static void LoadProjects()
 		{
 			Console.WriteLine("Loading projects...");
 
@@ -41,13 +75,16 @@ namespace Releaser.Migrations
 			var projectNodes = xml.Elements("Project").ToList();
 			foreach (XElement projectNode in projectNodes)
 			{
-				var command = new CreateProject();
-				command.ProjectName = projectNode.Element("ProjectName").Value;
-				command.ProjectPath = projectNode.Element("StoragePath").Value;
-				command.ProjectStorageType = projectNode.Element("StorageCode").Value;
-				command.ProjectType = projectNode.Element("ImageCode").Value;
+				var project = new Project(
+					projectNode.Element("ProjectName").Value,
+					projectNode.Element("StoragePath").Value,
+					projectNode.Element("StorageCode").Value,
+					projectNode.Element("ImageCode").Value
+					);
+				project.Id = projectNode.Element("ProjectUid").Value;
 
-				client.SendCommand(command);
+				s_entityStore.Write(project);
+				s_eventStore.SaveEvents(project.GetChanges());
 			}
 
 			sw.Stop();
@@ -58,7 +95,7 @@ namespace Releaser.Migrations
 				sw.ElapsedMilliseconds);
 		}
 
-		private static void LoadReleases(EngineClient client)
+		private static void LoadReleases()
 		{
 			Console.WriteLine("Loading releases...");
 
@@ -72,13 +109,15 @@ namespace Releaser.Migrations
 			var releaseNodes = xml.Elements("Release").ToList();
 			foreach (XElement releaseNode in releaseNodes)
 			{
-				var command = new CreateRelease();
-				command.ProjectId = releaseNode.Element("ProjectUid").Value;
-				command.UserId = releaseNode.Element("UserUid").Value;
-				command.VersionCode = releaseNode.Element("VersionCode").Value;
-				command.Comment = releaseNode.Element("ReleaseComment").Value;
+				var release = new Release(
+					releaseNode.Element("ReleaseCode").Value,
+					releaseNode.Element("VersionCode").Value,
+					releaseNode.Element("ProjectUid").Value,
+					releaseNode.Element("UserUid").Value,
+					releaseNode.Element("ReleaseComment").Value);
 
-				client.SendCommand(command);
+				s_entityStore.Write(release);
+				s_eventStore.SaveEvents(release.GetChanges());	
 			}
 
 			sw.Stop();
