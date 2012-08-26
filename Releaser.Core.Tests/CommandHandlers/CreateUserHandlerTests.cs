@@ -30,7 +30,7 @@ namespace Releaser.Core.Tests.CommandHandlers
 
 			store.Verify(s => s.Write(It.Is<User>(
 				u => u.Name == userName
-					 && u.Code == userCode
+					 && u.Id == userCode
 					 && u.Login == userLogin)),
 				Times.Once());
 
@@ -40,7 +40,7 @@ namespace Releaser.Core.Tests.CommandHandlers
 			var @event = (UserCreated)events[0];
 
 			Assert.AreEqual(userLogin, @event.User.Login);
-			Assert.AreEqual(userCode, @event.User.Code);
+			Assert.AreEqual(userCode, @event.User.Id);
 			Assert.AreEqual(userName, @event.User.Name);
 		}
 	}

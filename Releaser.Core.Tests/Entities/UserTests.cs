@@ -14,7 +14,7 @@ namespace Releaser.Core.Tests.Entities
 			const string userCode = "user code";
 			const string userName = "user name";
 
-			var user = new User(userLogin, userCode, userName);
+			var user = new User(userCode, userLogin, userName);
 
 			var events = user.GetChanges();
 
@@ -24,7 +24,7 @@ namespace Releaser.Core.Tests.Entities
 			var @event = (UserCreated)events[0];
 
 			Assert.AreEqual(userLogin, @event.User.Login);
-			Assert.AreEqual(userCode, @event.User.Code);
+			Assert.AreEqual(userCode, @event.User.Id);
 			Assert.AreEqual(userName, @event.User.Name);
 		}
 	}

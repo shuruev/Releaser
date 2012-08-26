@@ -16,6 +16,7 @@ namespace Releaser.Migrations
 		private static FileEntityStore s_entityStore;
 		private static FileEventStore s_eventStore;
 
+		private readonly static Dictionary<string, string> s_userMap = new Dictionary<string, string>();
 		private readonly static Dictionary<string, string> s_releasesMap = new Dictionary<string, string>();
 		private readonly static Dictionary<string, string> s_configurationMap = new Dictionary<string, string>();
 
@@ -50,13 +51,16 @@ namespace Releaser.Migrations
 			foreach (XElement userNode in userNodes)
 			{
 				var user = new User(
-					userNode.Element("UserLogin").Value,
 					userNode.Element("UserCode").Value,
+					userNode.Element("UserLogin").Value,
 					userNode.Element("UserName").Value);
-				user.Id = userNode.Element("UserUid").Value;
 
 				s_entityStore.Write(user);
 				s_eventStore.SaveEvents(user.GetChanges());
+
+				s_userMap.Add(
+					userNode.Element("UserUid").Value,
+					userNode.Element("UserCode").Value);
 			}
 
 			sw.Stop();
@@ -119,7 +123,7 @@ namespace Releaser.Migrations
 					releaseNode.Element("ReleaseCode").Value,
 					releaseNode.Element("VersionCode").Value,
 					releaseNode.Element("ProjectUid").Value,
-					releaseNode.Element("UserUid").Value,
+					s_userMap[releaseNode.Element("UserUid").Value],
 					releaseNode.Element("ReleaseComment").Value);
 
 				release.ReleaseDate = DateTime.Parse(releaseNode.Element("ReleaseDate").Value);
@@ -192,7 +196,7 @@ namespace Releaser.Migrations
 				var deployment = new Deployment(
 					s_releasesMap[deploymentNode.Element("ReleaseUid").Value],
 					s_configurationMap[deploymentNode.Element("ConfigurationUid").Value],
-					deploymentNode.Element("UserUid").Value);
+					s_userMap[deploymentNode.Element("UserUid").Value]);
 
 				deployment.Id = deploymentNode.Element("DeploymentUid").Value;
 				deployment.CreationDate = DateTime.Parse(deploymentNode.Element("DeploymentDate").Value);

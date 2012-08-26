@@ -25,8 +25,8 @@ namespace Releaser.Core.CommandHandlers
 		protected override List<BaseEvent> ExecuteInternal(CreateUser command)
 		{
 			var user = new User(
-				command.UserLogin,
 				command.UserCode,
+				command.UserLogin,
 				command.UserName);
 
 			m_store.Write(user);
