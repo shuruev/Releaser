@@ -1,23 +1,25 @@
+using System;
+
 namespace Releaser.Core.Events
 {
 	/// <summary>
-	/// Event which raises after adding releaser.
+	/// Event which raises after adding deployer.
 	/// </summary>
-	public class ReleaserAdded : BaseEvent
+	public class DeployerAdded : BaseEvent
 	{
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public ReleaserAdded(string projectId, string userId)
+		public DeployerAdded(string configurationId, string userId)
 		{
-			ProjectId = projectId;
+			ConfigurationId = configurationId;
 			UserId = userId;
 		}
 
 		/// <summary>
-		/// Gets or sets project ID.
+		/// Gets or sets configuration ID.
 		/// </summary>
-		public string ProjectId { get; set; }
+		public string ConfigurationId { get; set; }
 
 		/// <summary>
 		/// Gets or sets user ID.

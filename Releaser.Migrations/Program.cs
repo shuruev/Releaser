@@ -30,6 +30,7 @@ namespace Releaser.Migrations
 			LoadReleasers();
 			LoadReleases();
 			LoadConfigurations();
+			LoadDeployers();
 			LoadDeployments();
 
 			Console.WriteLine();
@@ -208,6 +209,36 @@ namespace Releaser.Migrations
 			Console.WriteLine(
 				"{0} configurations were loaded ({1}ms).",
 				2,
+				sw.ElapsedMilliseconds);
+		}
+
+		private static void LoadDeployers()
+		{
+			Console.WriteLine("Loading deployers...");
+
+			var sw = new Stopwatch();
+			sw.Start();
+
+			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+
+			var xml = XElement.Parse(dataFile);
+
+			var deployers = xml.Elements("Deployer").ToList();
+			foreach (XElement deployer in deployers)
+			{
+				var configurationId = deployer.Element("ConfigurationUid").Value;
+				var configuration = s_entityStore.Read<Configuration>(s_configurationMap[configurationId]);
+				configuration.AddDeployer(s_userMap[deployer.Element("UserUid").Value]);
+
+				s_entityStore.Write(configuration);
+				s_eventStore.SaveEvents(configuration.GetChanges());
+			}
+
+			sw.Stop();
+
+			Console.WriteLine(
+				"{0} deployers were loaded ({1}ms).",
+				deployers.Count,
 				sw.ElapsedMilliseconds);
 		}
 

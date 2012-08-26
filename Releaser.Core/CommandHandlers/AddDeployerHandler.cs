@@ -7,14 +7,14 @@ using Releaser.Core.Events;
 namespace Releaser.Core.CommandHandlers
 {
 	/// <summary>
-	/// Handles add releaser command.
+	/// Handles add deployer command.
 	/// </summary>
-	public class AddReleaserHandler : BaseCommandHandler<AddReleaser>
+	public class AddDeployerHandler : BaseCommandHandler<AddDeployer>
 	{
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public AddReleaserHandler(IEntityStore store)
+		public AddDeployerHandler(IEntityStore store)
 			: base(store)
 		{
 		}
@@ -22,15 +22,14 @@ namespace Releaser.Core.CommandHandlers
 		/// <summary>
 		/// Executes specified command.
 		/// </summary>
-		protected override List<BaseEvent> ExecuteInternal(AddReleaser command)
+		protected override List<BaseEvent> ExecuteInternal(AddDeployer command)
 		{
-			var project = m_store.Read<Project>(command.ProjectId);
+			var configuration = m_store.Read<Configuration>(command.ConfigurationId);
+			configuration.AddDeployer(command.UserId);
 
-			project.AddReleaser(command.UserId);
+			m_store.Write(configuration);
 
-			m_store.Write(project);
-
-			return project.GetChanges();
+			return configuration.GetChanges();
 		}
 	}
 }
