@@ -1,5 +1,7 @@
-﻿using Releaser.Core.Commands;
+﻿using System.Collections.Generic;
+using Releaser.Core.Commands;
 using Releaser.Core.Dto;
+using Releaser.Core.Events;
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.Text;
 
@@ -26,10 +28,25 @@ namespace Releaser.Core.Client
 		public void SendCommand(BaseCommand command)
 		{
 			var client = new JsonServiceClient(m_url);
-			client.Send<object>(new CommandDto
+			client.Send<object>(new RequestDto
 			{
+				Type = RequestDto.CommandType,
 				Json = command.ToJson()
 			});
+		}
+
+		/// <summary>
+		/// Gets all events from event store.
+		/// </summary>
+		public List<BaseEvent> GetAllEvents()
+		{
+			var client = new JsonServiceClient(m_url);
+			List<BaseEvent> result = client.Send<List<BaseEvent>>(new RequestDto
+			{
+				Type = RequestDto.QueryType,
+				Json = "GetAllEvents"
+			});
+			return result;
 		}
 	}
 }

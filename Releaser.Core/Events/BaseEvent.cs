@@ -6,8 +6,16 @@ namespace Releaser.Core.Events
 	/// <summary>
 	/// Base class for all events.
 	/// </summary>
-	public class BaseEvent
+	public abstract class BaseEvent
 	{
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		protected BaseEvent()
+		{
+			EventDate = DateTime.UtcNow;
+		}
+
 		/// <summary>
 		/// Gets command name.
 		/// </summary>
@@ -16,5 +24,10 @@ namespace Releaser.Core.Events
 		{
 			get { return GetType().FullName; }
 		}
+
+		/// <summary>
+		/// Gets or sets internal event date.
+		/// </summary>
+		public DateTime EventDate { get; set; }
 	}
 }

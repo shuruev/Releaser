@@ -1,5 +1,4 @@
-﻿// ReSharper disable PossibleNullReferenceException
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -9,16 +8,17 @@ using Releaser.Core.Entities;
 using Releaser.Core.EntityStore;
 using Releaser.Core.EventStore;
 
+// ReSharper disable PossibleNullReferenceException
 namespace Releaser.Migrations
 {
 	public class Program
 	{
+		private static readonly Dictionary<string, string> s_userMap = new Dictionary<string, string>();
+		private static readonly Dictionary<string, string> s_releasesMap = new Dictionary<string, string>();
+		private static readonly Dictionary<string, string> s_configurationMap = new Dictionary<string, string>();
+
 		private static FileEntityStore s_entityStore;
 		private static FileEventStore s_eventStore;
-
-		private readonly static Dictionary<string, string> s_userMap = new Dictionary<string, string>();
-		private readonly static Dictionary<string, string> s_releasesMap = new Dictionary<string, string>();
-		private readonly static Dictionary<string, string> s_configurationMap = new Dictionary<string, string>();
 
 		public static void Main()
 		{
@@ -27,6 +27,7 @@ namespace Releaser.Migrations
 
 			LoadUsers();
 			LoadProjects();
+			LoadKeywords();
 			LoadReleasers();
 			LoadReleases();
 			LoadConfigurations();
@@ -45,7 +46,7 @@ namespace Releaser.Migrations
 			var sw = new Stopwatch();
 			sw.Start();
 
-			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+			string dataFile = File.ReadAllText(@"..\..\..\Data.tmp\ReleaserData.xml");
 
 			var xml = XElement.Parse(dataFile);
 
@@ -80,7 +81,7 @@ namespace Releaser.Migrations
 			var sw = new Stopwatch();
 			sw.Start();
 
-			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+			string dataFile = File.ReadAllText(@"..\..\..\Data.tmp\ReleaserData.xml");
 
 			var xml = XElement.Parse(dataFile);
 
@@ -91,8 +92,8 @@ namespace Releaser.Migrations
 					projectNode.Element("ProjectName").Value,
 					projectNode.Element("StoragePath").Value,
 					projectNode.Element("StorageCode").Value,
-					projectNode.Element("ImageCode").Value
-					);
+					projectNode.Element("ImageCode").Value);
+
 				project.Id = projectNode.Element("ProjectUid").Value;
 
 				s_entityStore.Write(project);
@@ -107,6 +108,57 @@ namespace Releaser.Migrations
 				sw.ElapsedMilliseconds);
 		}
 
+		private static void LoadKeywords()
+		{
+			Console.WriteLine("Loading keywords...");
+
+			var sw = new Stopwatch();
+			sw.Start();
+
+			string dataFile = File.ReadAllText(@"..\..\..\Data.tmp\ReleaserData.xml");
+
+			var xml = XElement.Parse(dataFile);
+
+			Dictionary<string, string> keywordMap = new Dictionary<string, string>();
+
+			var keywords = xml.Elements("Keyword").ToList();
+			foreach (XElement keyword in keywords)
+			{
+				keywordMap.Add(
+					keyword.Element("KeywordUid").Value,
+					keyword.Element("Keyword").Value);
+			}
+
+			Dictionary<string, List<string>> projectKeywordData = new Dictionary<string, List<string>>();
+
+			var projectKeywords = xml.Elements("ProjectKeyword").ToList();
+			foreach (XElement keyword in projectKeywords)
+			{
+				var projectId = keyword.Element("ProjectUid").Value;
+				if (!projectKeywordData.ContainsKey(projectId))
+					projectKeywordData[projectId] = new List<string>();
+
+				projectKeywordData[projectId].Add(
+					keywordMap[keyword.Element("KeywordUid").Value]);
+			}
+
+			foreach (var projectId in projectKeywordData.Keys)
+			{
+				var project = s_entityStore.Read<Project>(projectId);
+				project.AddKeywords(projectKeywordData[projectId]);
+
+				s_entityStore.Write(project);
+				s_eventStore.SaveEvents(project.GetChanges());
+			}
+
+			sw.Stop();
+
+			Console.WriteLine(
+				"{0} keywords were loaded ({1}ms).",
+				projectKeywords.Count,
+				sw.ElapsedMilliseconds);
+		}
+
 		private static void LoadReleasers()
 		{
 			Console.WriteLine("Loading releasers...");
@@ -114,7 +166,7 @@ namespace Releaser.Migrations
 			var sw = new Stopwatch();
 			sw.Start();
 
-			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+			string dataFile = File.ReadAllText(@"..\..\..\Data.tmp\ReleaserData.xml");
 
 			var xml = XElement.Parse(dataFile);
 
@@ -137,7 +189,6 @@ namespace Releaser.Migrations
 				sw.ElapsedMilliseconds);
 		}
 
-
 		private static void LoadReleases()
 		{
 			Console.WriteLine("Loading releases...");
@@ -145,7 +196,7 @@ namespace Releaser.Migrations
 			var sw = new Stopwatch();
 			sw.Start();
 
-			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+			string dataFile = File.ReadAllText(@"..\..\..\Data.tmp\ReleaserData.xml");
 
 			var xml = XElement.Parse(dataFile);
 
@@ -219,7 +270,7 @@ namespace Releaser.Migrations
 			var sw = new Stopwatch();
 			sw.Start();
 
-			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+			string dataFile = File.ReadAllText(@"..\..\..\Data.tmp\ReleaserData.xml");
 
 			var xml = XElement.Parse(dataFile);
 
@@ -249,7 +300,7 @@ namespace Releaser.Migrations
 			var sw = new Stopwatch();
 			sw.Start();
 
-			string dataFile = File.ReadAllText(@"c:\!Data\Dropbox\Projects\Releaser\Data.tmp\ReleaserData.xml");
+			string dataFile = File.ReadAllText(@"..\..\..\Data.tmp\ReleaserData.xml");
 
 			var xml = XElement.Parse(dataFile);
 
@@ -276,5 +327,6 @@ namespace Releaser.Migrations
 				sw.ElapsedMilliseconds);
 		}
 	}
+
+	// ReSharper restore PossibleNullReferenceException
 }
-// ReSharper restore PossibleNullReferenceException

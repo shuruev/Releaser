@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Releaser.Core.EventStore;
+using Releaser.Core.Events;
 
 namespace ReleaserConsole
 {
@@ -9,6 +13,8 @@ namespace ReleaserConsole
 		{
 			var sw = new Stopwatch();
 			sw.Start();
+
+			FileEventStore fs = new FileEventStore("this.dat");
 
 			sw.Stop();
 			Console.WriteLine("{0}ms...", sw.ElapsedMilliseconds);

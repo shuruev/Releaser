@@ -30,9 +30,9 @@ namespace Releaser.Core.Tests.CommandHandlers
 
 			store.Verify(s => s.Write(It.Is<Deployment>(
 				u => u.ReleaseId == releaseId
-				     && u.ConfigurationId == configurationId
-				     && u.UserId == userId)),
-			             Times.Once());
+					&& u.ConfigurationId == configurationId
+					&& u.UserId == userId)),
+				Times.Once());
 
 			Assert.AreEqual(1, events.Count);
 			Assert.IsTrue(events[0] is DeploymentCreated);

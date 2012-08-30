@@ -30,7 +30,7 @@ namespace Releaser.Core.EventStore
 		{
 			lock (m_sync)
 			{
-				using (var fs = new FileStream(m_filePath, FileMode.Append, FileAccess.Write))
+				using (var fs = new FileStream(m_filePath, FileMode.Append, FileAccess.Write, FileShare.Read))
 				using (var writer = new BinaryWriter(fs, Encoding.UTF8))
 				{
 					foreach (var @event in events)
@@ -52,24 +52,21 @@ namespace Releaser.Core.EventStore
 		/// </summary>
 		public IEnumerable<BaseEvent> ReadAllEvents()
 		{
-			lock (m_sync)
+			if (!File.Exists(m_filePath))
+				yield break;
+
+			using (var fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+			using (var reader = new BinaryReader(fs, Encoding.UTF8))
 			{
-				if (!File.Exists(m_filePath))
-					yield break;
+				var length = (int)reader.BaseStream.Length;
 
-				using (var fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read))
-				using (var reader = new BinaryReader(fs, Encoding.UTF8))
+				while (fs.Position < length)
 				{
-					var length = (int) reader.BaseStream.Length;
-
-					while (fs.Position < length)
-					{
-						var json = reader.ReadString();
-						var sc = JsonConvert.DeserializeObject<StoredCommand>(json);
-						var type = Type.GetType(sc.Type);
-						var @event = (BaseEvent) JsonConvert.DeserializeObject(sc.Json, type);
-						yield return @event;
-					}
+					var json = reader.ReadString();
+					var sc = JsonConvert.DeserializeObject<StoredCommand>(json);
+					var type = Type.GetType(sc.Type);
+					var @event = (BaseEvent)JsonConvert.DeserializeObject(sc.Json, type);
+					yield return @event;
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 ﻿using System;
 using Releaser.Core.Commands;
-using Releaser.Core.Utils;
+using ServiceStack.Text;
 
 namespace Releaser.Core.Exceptions
 {
@@ -13,7 +13,7 @@ namespace Releaser.Core.Exceptions
 		/// Initializes a new instance.
 		/// </summary>
 		public CommandNotSupportedException(BaseCommand command)
-			: base("Command {0} is not supported.".F(command.Name))
+			: base("Command {0} is not supported.".Fmt(command.Name))
 		{
 		}
 	}

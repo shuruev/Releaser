@@ -90,8 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\EngineClient.cs" />
     <Compile Include="CommandHandlers\AddDeployerHandler.cs" />
+    <Compile Include="CommandHandlers\AddKeywordHandler.cs" />
     <Compile Include="CommandHandlers\AddReleaserHandler.cs" />
     <Compile Include="CommandHandlers\BaseCommandHandler.cs" />
     <Compile Include="CommandHandlers\ChangeReleaseCommentHandler.cs" />
@@ -104,6 +104,7 @@
     <Compile Include="CommandHandlers\CreateProjectHandler.cs" />
     <Compile Include="CommandEngine.cs" />
     <Compile Include="Commands\AddDeployer.cs" />
+    <Compile Include="Commands\AddKeywords.cs" />
     <Compile Include="Commands\AddReleaser.cs" />
     <Compile Include="Commands\ChangeReleaseComment.cs" />
     <Compile Include="Commands\CreateConfiguration.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Commands\CreateUser.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Entities\Configuration.cs" />
+    <Compile Include="Events\KeywordsAdded.cs" />
     <Compile Include="Events\DeployerAdded.cs" />
     <Compile Include="Entities\Deployment.cs" />
     <Compile Include="Events\ReleaserAdded.cs" />
@@ -126,7 +128,7 @@
     <Compile Include="EventStore\FileEventStore.cs" />
     <Compile Include="EventStore\StoredEvent.cs" />
     <Compile Include="Denormalizer\Denormalizer.cs" />
-    <Compile Include="Dto\CommandDto.cs" />
+    <Compile Include="Dto\RequestDto.cs" />
     <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\ProjectCreated.cs" />
     <Compile Include="Exceptions\CommandNotSupportedException.cs" />
@@ -140,13 +142,14 @@
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityStore\IEntityStore.cs" />
-    <Compile Include="Utils\StringExtentions.cs" />
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\IViewFactory.cs" />
     <Compile Include="Views\ProjectsView.cs" />
     <Compile Include="Views\ViewFactory.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -14,10 +14,12 @@ namespace Releaser.Engine
 	{
 		static Context()
 		{
+			EventStore = new FileEventStore(@"C:\Temp\ReleaserData\EventStore.dat");
+
 			Engine = new CommandEngine(
 				new CommandHandlerFactory(
 					new FileEntityStore(@"C:\Temp\ReleaserData")),
-				new FileEventStore(@"C:\Temp\ReleaserData\EventStore.dat"),
+				EventStore,
 				new Denormalizer(
 					new ViewFactory()));
 		}
@@ -27,12 +29,16 @@ namespace Releaser.Engine
 		/// </summary>
 		public static void Initialize()
 		{
-			
 		}
 
 		/// <summary>
 		/// Gets static command engine.
 		/// </summary>
 		public static CommandEngine Engine { get; private set; }
+
+		/// <summary>
+		/// Gets static command engine.
+		/// </summary>
+		public static IEventStore EventStore { get; private set; }
 	}
 }

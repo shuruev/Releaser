@@ -15,6 +15,7 @@ namespace Releaser.Core.Entities
 		public Project()
 		{
 			Releasers = new List<string>();
+			Keywords = new List<string>();
 		}
 
 		/// <summary>
@@ -36,6 +37,7 @@ namespace Releaser.Core.Entities
 			CreationDate = DateTime.UtcNow;
 
 			Releasers = new List<string>();
+			Keywords = new List<string>();
 
 			Apply(new ProjectCreated(this));
 		}
@@ -71,6 +73,11 @@ namespace Releaser.Core.Entities
 		public List<string> Releasers { get; set; }
 
 		/// <summary>
+		/// Gets or sets list of keywords.
+		/// </summary>
+		public List<string> Keywords { get; set; }
+
+		/// <summary>
 		/// Adds the specified user as releaser.
 		/// </summary>
 		public void AddReleaser(string userId)
@@ -78,6 +85,16 @@ namespace Releaser.Core.Entities
 			Releasers.Add(userId);
 
 			Apply(new ReleaserAdded(Id, userId));
+		}
+
+		/// <summary>
+		/// Adds the specified keywords.
+		/// </summary>
+		public void AddKeywords(List<string> keywords)
+		{
+			Keywords.AddRange(keywords);
+
+			Apply(new KeywordsAdded(Id, keywords));
 		}
 	}
 }

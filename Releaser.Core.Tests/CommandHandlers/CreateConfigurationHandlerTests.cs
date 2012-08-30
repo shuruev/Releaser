@@ -30,8 +30,8 @@ namespace Releaser.Core.Tests.CommandHandlers
 
 			store.Verify(s => s.Write(It.Is<Configuration>(
 				u => u.Name == name
-					 && u.Id == code
-					 && u.Description == description)),
+					&& u.Id == code
+					&& u.Description == description)),
 				Times.Once());
 
 			Assert.AreEqual(1, events.Count);

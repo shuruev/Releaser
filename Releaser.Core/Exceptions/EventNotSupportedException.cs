@@ -1,6 +1,6 @@
 ﻿using System;
 using Releaser.Core.Events;
-using Releaser.Core.Utils;
+using ServiceStack.Text;
 
 namespace Releaser.Core.Exceptions
 {
@@ -13,7 +13,7 @@ namespace Releaser.Core.Exceptions
 		/// Initializes a new instance.
 		/// </summary>
 		public EventNotSupportedException(BaseEvent @event)
-			: base("Event {0} is not supported.".F(@event.Name))
+			: base("Event {0} is not supported.".Fmt(@event.Name))
 		{
 		}
 	}

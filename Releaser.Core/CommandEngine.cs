@@ -4,7 +4,6 @@ using Releaser.Core.CommandHandlers;
 using Releaser.Core.Commands;
 using Releaser.Core.Denormalizer;
 using Releaser.Core.EventStore;
-using Releaser.Core.Events;
 using Releaser.Core.Exceptions;
 
 namespace Releaser.Core
@@ -64,6 +63,5 @@ namespace Releaser.Core
 
 			Console.WriteLine("Views were rebuilt ({0}ms).", sw.ElapsedMilliseconds);
 		}
-
 	}
 }

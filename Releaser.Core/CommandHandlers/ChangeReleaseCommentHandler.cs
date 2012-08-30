@@ -4,7 +4,7 @@ using Releaser.Core.Commands;
 using Releaser.Core.Entities;
 using Releaser.Core.EntityStore;
 using Releaser.Core.Events;
-using Releaser.Core.Utils;
+using ServiceStack.Text;
 
 namespace Releaser.Core.CommandHandlers
 {
@@ -29,7 +29,7 @@ namespace Releaser.Core.CommandHandlers
 			if (release == null)
 			{
 				throw new InvalidOperationException(
-					"Release with ID = '{0}' does not exist in store.".F(command.ReleaseId));
+					"Release with ID = '{0}' does not exist in store.".Fmt(command.ReleaseId));
 			}
 
 			release.ChangeComment(command.Comment);
